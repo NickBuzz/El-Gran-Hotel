@@ -2,7 +2,6 @@ package AccesoADatos;
 
 import Entidades.Huesped;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +19,8 @@ public class HuespedData {
     }
 
     public void guardarHuesped(Huesped huesped) {
-        String sql = "INSERT INTO huesped(nombre, dni, correo, celular, domicilio)"
-                + "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO huesped(nombre, dni, correo, celular, domicilio, estado)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, huesped.getNombre());
@@ -29,6 +28,7 @@ public class HuespedData {
             ps.setString(3, huesped.getCorreo());
             ps.setInt(4, huesped.getCelular());
             ps.setString(5, huesped.getDomicilio());
+            ps.setInt(6, huesped.isEstado()?1:0);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -42,7 +42,7 @@ public class HuespedData {
     }
 
     public void modificarHuesped(Huesped huesped) {
-        String sql = "UPDATE huesped SET nombre =?, dni =?, correo =?, celular =?, domicilio =?"
+        String sql = "UPDATE huesped SET nombre =?, dni =?, correo =?, celular =?, domicilio =?, estado =? "
                 + "WHERE IdHuesped =?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -51,6 +51,8 @@ public class HuespedData {
             ps.setString(3, huesped.getCorreo());
             ps.setInt(4, huesped.getCelular());
             ps.setString(5, huesped.getDomicilio());
+            ps.setInt(6, huesped.isEstado()?1:0);
+            ps.setInt(7, huesped.getIdHuesped());
             int exito = ps.executeUpdate();
             if (exito >= 1) {
                 JOptionPane.showMessageDialog(null, "Huesped acutalizado con exito");
@@ -60,7 +62,7 @@ public class HuespedData {
         }
     }
 
-/*    public void eliminarHuesped(int id) {
+   public void eliminarHuesped(int id) {
         String sql = "UPDATE huesped SET estado = 0 WHERE IdHuesped = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -73,11 +75,11 @@ public class HuespedData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped");
         }
 
-    }*/
+    }
     
     public Huesped buscarHuesped(int id) {
         Huesped huesped = null;
-        String sql = "SELECT nombre, dni, correo, celular, domicilio FROM huesped WHERE IdHuesped = ?";
+        String sql = "SELECT nombre, dni, correo, celular, domicilio, estado FROM huesped WHERE IdHuesped = ? AND estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -91,6 +93,7 @@ public class HuespedData {
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getInt("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No hay un huesped registrado con ese id");
                 ps.close();
@@ -103,7 +106,7 @@ public class HuespedData {
 
     public Huesped buscarHuespedPorDni(int dni) {
         Huesped huesped = null;
-        String sql = "SELECT idHuesped, nombre, dni, correo, celular, domicilio FROM huesped WHERE dni = ?";
+        String sql = "SELECT idHuesped, nombre, dni, correo, celular, domicilio, estado FROM huesped WHERE dni = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -117,6 +120,7 @@ public class HuespedData {
                 huesped.setCorreo(rs.getString("correo"));
                 huesped.setCelular(rs.getInt("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el huesped");
             }
@@ -127,10 +131,10 @@ public class HuespedData {
         return huesped;
     }
     
-    public List<Huesped> listarAlumnos() {
+    public List<Huesped> listarHuespedes() {
         List<Huesped> huespedes = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM alumno WHERE estado = 1 ";
+            String sql = "SELECT * FROM huesped";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -141,6 +145,7 @@ public class HuespedData {
                 huesped.setCorreo(rs.getString("correo"));                
                 huesped.setCelular(rs.getInt("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
+                huesped.setEstado(rs.getBoolean("estado"));
                 huespedes.add(huesped);
             }
             ps.close();

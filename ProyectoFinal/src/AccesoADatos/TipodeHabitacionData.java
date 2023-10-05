@@ -73,6 +73,7 @@ public class TipodeHabitacionData {
         return tipohabitacion;
     }
     
+    //guardar tipo de habitacion
     public void guardarTipoHabitacion(TipodeHabitacion tipohabitacion) {
         String sql = "INSERT INTO tipohabitacion(Capacidad, CantCamas, TipoCamas, PrecioNoche, Codigo )"
                 + "VALUES (?, ?, ?, ?, ?)";
@@ -99,6 +100,26 @@ public class TipodeHabitacionData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexion" + ex.getMessage());
+        }
+
+    }
+    
+    //eliminar tipo de habitacion por id
+    public void eliminarAlumno(int id) {
+
+        String sql = "DELETE FROM tipohabitacion WHERE IdTipoHabitacion = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito >= 1) {
+
+                JOptionPane.showMessageDialog(null, "Tipo de habitacion borrado con exito");
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitacion");
         }
 
     }

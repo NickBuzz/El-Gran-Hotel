@@ -1,7 +1,8 @@
 package Entidades;
 
+import AccesoADatos.HabitacionData;
 import AccesoADatos.HuespedData;
-import com.sun.xml.internal.ws.util.xml.XMLReaderComposite;
+
 import java.util.List;
 
 public class Main {
@@ -9,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         HuespedData HD = new HuespedData();
+        HabitacionData HHD = new HabitacionData(); 
 
 //        HD.guardarHuesped(new Huesped("Carlitos", 1234256, "correo@mail.com", 789456123, "domicilio"));
 //        HD.guardarHuesped(new Huesped("Ana", 987654321, "ana@mail.com", 123456789, "Calle Secundaria 456"));
@@ -31,5 +33,13 @@ public class Main {
         HD.modificarHuesped(huesped1);
 
         HD.eliminarHuesped(huesped1.getIdHuesped());
+        
+        HHD.guardarHabitacion(new Habitacion(01, 00, 1, false));
+        List listaHabitacion = HHD.listarHabitaciones();
+        listaHabitacion.forEach((Habitacion) -> {
+            System.out.println(Habitacion.toString());
+        });
+        
+        
     }
 }

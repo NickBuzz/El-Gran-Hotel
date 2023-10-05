@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -105,7 +107,7 @@ public class TipodeHabitacionData {
     }
     
     //eliminar tipo de habitacion por id
-    public void eliminarAlumno(int id) {
+    public void eliminarTipodeHabitacion(int id) {
 
         String sql = "DELETE FROM tipohabitacion WHERE IdTipoHabitacion = ?";
 
@@ -122,6 +124,32 @@ public class TipodeHabitacionData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitacion");
         }
 
+    }
+    
+    //listado de tipo de habitacion 
+    public List<TipodeHabitacion> listarTipodeHabitaciones() {
+
+        List<TipodeHabitacion> tipodehabitaciones = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM tipohabitacion";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                TipodeHabitacion tipohabitacion = new TipodeHabitacion();
+                tipohabitacion.setIdTipoHabitacion(rs.getInt("IdTipoHabitacion"));
+                tipohabitacion.setCapacidad(rs.getInt("Capacidad"));                               
+                tipohabitacion.setIntcantCamas(rs.getInt("CantCamas"));
+                tipohabitacion.setTipoCamas(rs.getString("TipoCamas"));
+                tipohabitacion.setPrecioNoche(rs.getDouble("PrecioNoche"));
+                tipohabitacion.setCodigo(rs.getString("Codigo"));
+                tipodehabitaciones.add(tipohabitacion);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla tipo de habitacion" + ex.getMessage());
+        }
+        return tipodehabitaciones;
     }
     
 }

@@ -66,6 +66,11 @@ public class Menu extends javax.swing.JFrame {
         buttonGroup1.add(Habitaciones);
         Habitaciones.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         Habitaciones.setText("HABITACIONES");
+        Habitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HabitacionesActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(Huesped);
         Huesped.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -256,6 +261,10 @@ public class Menu extends javax.swing.JFrame {
     private void HuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuespedActionPerformed
         
     }//GEN-LAST:event_HuespedActionPerformed
+
+    private void HabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabitacionesActionPerformed
+        showJPanel(Contenido, new Habitaciones());
+    }//GEN-LAST:event_HabitacionesActionPerformed
 
     public static void showJPanel(JPanel c, JPanel p) {
         p.setSize(1000, 690);

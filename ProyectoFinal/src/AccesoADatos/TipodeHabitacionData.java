@@ -8,6 +8,7 @@ package AccesoADatos;
 import Entidades.TipodeHabitacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -41,6 +42,32 @@ public class TipodeHabitacionData {
             JOptionPane.showMessageDialog(null, "Error de conexion: " + ex.getMessage());
         }
         
+    }
+    
+    public TipodeHabitacion buscarTipoHabitacion(int id) {
+        TipodeHabitacion tipohabitacion = null;
+        String sql = "SELECT Capacidad, CantCamas, TipoCamas, PrecioNoche, Codigo FROM tipohabitacion WHERE IdTipoHabitacion = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                tipohabitacion = new TipodeHabitacion();
+                tipohabitacion.setIdTipoHabitacion(id);
+                tipohabitacion.setCapacidad(rs.getInt("Capacidad"));                               
+                tipohabitacion.setIntcantCamas(rs.getInt("CantCamas"));
+                tipohabitacion.setTipoCamas(rs.getString("TipoCamas"));
+                tipohabitacion.setPrecioNoche(rs.getInt("PrecioNoche"));
+                tipohabitacion.setCodigo(rs.getString("Codigo"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay un tipo de habitacion registrado con ese id");
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitacion " + ex.getMessage());
+        }
+        return tipohabitacion;
     }
     
 }

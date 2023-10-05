@@ -26,7 +26,7 @@ public class HuespedData {
             ps.setString(1, huesped.getNombre());
             ps.setInt(2, huesped.getDni());
             ps.setString(3, huesped.getCorreo());
-            ps.setInt(4, huesped.getCelular());
+            ps.setLong(4, huesped.getCelular());
             ps.setString(5, huesped.getDomicilio());
             ps.setInt(6, huesped.isEstado()?1:0);
             ps.executeUpdate();
@@ -49,7 +49,7 @@ public class HuespedData {
             ps.setString(1, huesped.getNombre());
             ps.setInt(2, huesped.getDni());
             ps.setString(3, huesped.getCorreo());
-            ps.setInt(4, huesped.getCelular());
+            ps.setLong(4, huesped.getCelular());
             ps.setString(5, huesped.getDomicilio());
             ps.setInt(6, huesped.isEstado()?1:0);
             ps.setInt(7, huesped.getIdHuesped());
@@ -91,7 +91,7 @@ public class HuespedData {
                 huesped.setNombre(rs.getString("nombre"));                               
                 huesped.setDni(rs.getInt("dni"));
                 huesped.setCorreo(rs.getString("correo"));
-                huesped.setCelular(rs.getInt("celular"));
+                huesped.setCelular(rs.getLong("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setEstado(rs.getBoolean("estado"));
             } else {
@@ -118,7 +118,7 @@ public class HuespedData {
                 huesped.setNombre(rs.getString("nombre"));                               
                 huesped.setDni(rs.getInt("dni"));
                 huesped.setCorreo(rs.getString("correo"));
-                huesped.setCelular(rs.getInt("celular"));
+                huesped.setCelular(rs.getLong("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setEstado(rs.getBoolean("estado"));
             } else {
@@ -143,7 +143,7 @@ public class HuespedData {
                 huesped.setNombre(rs.getString("nombre"));
                 huesped.setDni(rs.getInt("dni"));
                 huesped.setCorreo(rs.getString("correo"));                
-                huesped.setCelular(rs.getInt("celular"));
+                huesped.setCelular(rs.getLong("celular"));
                 huesped.setDomicilio(rs.getString("domicilio"));
                 huesped.setEstado(rs.getBoolean("estado"));
                 huespedes.add(huesped);

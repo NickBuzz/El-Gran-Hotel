@@ -264,7 +264,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_LuzTemaMouseClicked
 
     private void HuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuespedActionPerformed
-        
+        showJPanel(Contenido, new Huespedes());
     }//GEN-LAST:event_HuespedActionPerformed
 
     private void HabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabitacionesActionPerformed

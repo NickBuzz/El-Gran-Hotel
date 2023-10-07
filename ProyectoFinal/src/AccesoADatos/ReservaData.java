@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class ReservaData {
             ps.setDouble(4, reserva.getMonto());
             ps.setBoolean(5, reserva.isEstado());
             ps.setInt(6, reserva.getHuesped().getIdHuesped());
-            ps.setInt(7, reserva.getHabitaciones().getIdHabitaciones());
+            ps.setInt(7, reserva.getHabitacion().getIdHabitacion());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -55,10 +56,67 @@ public class ReservaData {
         }
 
     }
-    public List<Reserva> obtenerReservas(){
-        
+
+    public List<Reserva> obtenerReservas() {
+        List<Reserva> reservas = new ArrayList<>();
+
+        String sql = "SELECT * FROM reserva ";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Reserva reserva = new Reserva();
+                reserva.setIdReserva(rs.getInt("IdReserva"));
+                reserva.setFechaEntrada(rs.getDate("FechaEntrada").toLocalDate());
+                reserva.setFechaSalida(rs.getDate("FechaSalida").toLocalDate());
+                reserva.setCantidadPerso(rs.getInt("CantidadPerso"));
+                reserva.setMonto(rs.getDouble("Monto"));
+                reserva.setEstado(rs.getBoolean("Estado"));
+                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt("IdHuesped")));
+                reserva.setHabitacion(habiData.buscarHabitacion(rs.getInt("IdHabitacion")));
+                reservas.add(reserva);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se a podido acceder a la tabla reserva" + ex.getMessage());
+        }
+        return reservas;
     }
-public List<Reserva> obtenerReservaPorHuesped (int id){
+
+    public List<Reserva> obtenerReservaPorHuesped(int IdHuesped) {
+        List<Reserva> reservas = new ArrayList<>();
+        String sql = "SELECT * FROM reserva WHERE IdHuesped = ? ";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, IdHuesped);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Reserva reserva = new Reserva();
+
+                reserva.setIdReserva(rs.getInt("IdReserva"));
+                reserva.setFechaEntrada(rs.getDate("FechaEntrada").toLocalDate());
+                reserva.setFechaSalida(rs.getDate("FechaSalida").toLocalDate());
+                reserva.setCantidadPerso(rs.getInt("CantidadPerso"));
+                reserva.setMonto(rs.getDouble("Monto"));
+                reserva.setEstado(rs.getBoolean("Estado"));
+                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt("IdHuesped")));
+                reserva.setHabitacion(habiData.buscarHabitacion(rs.getInt("IdHabitacion")));
+                reservas.add(reserva);
+
+            }
+            rs.close();
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se a podido acceder a la tabla reserva" + ex.getMessage());
+        }
+return reservas;
+
+    }
     
-}
+    
+    
 }

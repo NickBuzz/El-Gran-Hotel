@@ -28,6 +28,18 @@ public class Reserva {
         this.habitacion = habitacion;
     }
 
+    public Reserva(int IdReserva, LocalDate FechaEntrada, LocalDate FechaSalida, int CantidadPerso, double Monto, boolean estado, Huesped huesped, Habitacion habitacion) {
+        this.IdReserva = IdReserva;
+        this.FechaEntrada = FechaEntrada;
+        this.FechaSalida = FechaSalida;
+        this.CantidadPerso = CantidadPerso;
+        this.Monto = Monto;
+        this.estado = estado;
+        this.huesped = huesped;
+        this.habitacion = habitacion;
+    }
+    
+
     public int getIdReserva() {
         return IdReserva;
     }

@@ -37,7 +37,7 @@ public class HabitacionData {
             ps.setInt(1, habitacion.getNumero());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.isEstado()?1:0);
-            ps.setInt(4, habitacion.getTipoDeHabitacion().getIdTipoHabitacion());
+            ps.setInt(4, habitacion.getIdTDHabitacion());
   
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -59,7 +59,7 @@ public class HabitacionData {
             ps.setInt(1, habitacion.getNumero());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.isEstado()?1:0);
-            ps.setInt(4, habitacion.getTipoDeHabitacion().getIdTipoHabitacion());
+           ps.setInt(4, habitacion.getIdTDHabitacion());
         
             int exito = ps.executeUpdate();
             if (exito >= 1) {

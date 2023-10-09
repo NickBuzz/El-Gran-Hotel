@@ -88,7 +88,9 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jtNuevoTipoDeHabitacionActionPerformed
 
     private void jtEliminarTipoDeHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEliminarTipoDeHabitacionActionPerformed
-        // TODO add your handling code here:
+        
+        showJPanel(jpContenido, new EliminarTipoDeHabitacion(thd));
+        
     }//GEN-LAST:event_jtEliminarTipoDeHabitacionActionPerformed
 
 

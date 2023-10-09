@@ -21,7 +21,6 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
     public NuevoTipoDeHabitacion(TipodeHabitacionData thd) {
         initComponents();
         this.thd = thd;
-        listaTipodeHabitacion=thd.listarTipodeHabitaciones();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -163,11 +162,12 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
 
     private void jtbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbCrearActionPerformed
         
+        listaTipodeHabitacion = thd.listarTipodeHabitaciones();
         th = new TipodeHabitacion();
 
         th.setCodigo(jcTipoDeHabitacion.getSelectedItem().toString());
         th.setTipoCamas((String) jcTipoDeCamas.getSelectedItem());
-        
+
         try {
 
             th.setCapacidad(Integer.parseInt(jtCapacidad.getText()));
@@ -178,32 +178,32 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
 
             JOptionPane.showMessageDialog(null, "Por favor verifique no dejar campos vacios");
             return;
-            
+
         }
 
-        if (th.getCodigo()=="SELECCIONE EL TIPO DE HABITACION") {
-            
+        if (th.getCodigo() == "SELECCIONE EL TIPO DE HABITACION") {
+
             JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de habitacion");
             return;
-            
+
         }
-        
-        if (th.getTipoCamas()=="SELECCIONE UN TIPO DE CAMA") {
-            
+
+        if (th.getTipoCamas() == "SELECCIONE UN TIPO DE CAMA") {
+
             JOptionPane.showMessageDialog(null, "Por favor seleccione un tipo de cama");
             return;
-            
+
         }
-        
+
         for (TipodeHabitacion lista : listaTipodeHabitacion) {
-            
-            if (lista.getCodigo()==th.getCodigo() && lista.getTipoCamas()==th.getTipoCamas() && lista.getCapacidad()==th.getCapacidad() && lista.getIntcantCamas()==th.getIntcantCamas()) {
-                
+
+            if (lista.getCodigo().equals(th.getCodigo()) && lista.getTipoCamas().equals(th.getTipoCamas()) && lista.getCapacidad() == th.getCapacidad() && lista.getIntcantCamas() == th.getIntcantCamas()) {
+
                 JOptionPane.showMessageDialog(null, "Ya existe un tipo de habitacion con las mismas caracteristicas");
                 return;
-                
+
             }
-            
+
         }
         
         thd.guardarTipoHabitacion(th);

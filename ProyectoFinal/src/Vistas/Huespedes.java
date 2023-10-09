@@ -191,14 +191,14 @@ public class Huespedes extends javax.swing.JPanel {
             Object valor = jtHuespedes.getValueAt(seleccion, 0);
             int dni = (int) valor;
             Huesped parametro = HD.buscarHuespedPorDni(dni);
-            Menu.showJPanel(this, new HuespedesEditar(parametro));
+            Menu.showJPanel(this, new HuespedesFormulario(parametro));
         }else{
             JOptionPane.showMessageDialog(null, "Seleccione el huesped a editar.");
         }
     }//GEN-LAST:event_BEditarActionPerformed
 
     private void BNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BNuevoActionPerformed
-        Menu.showJPanel(this, new HuespedesNuevo());
+        Menu.showJPanel(this, new HuespedesFormulario());
     }//GEN-LAST:event_BNuevoActionPerformed
 
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed

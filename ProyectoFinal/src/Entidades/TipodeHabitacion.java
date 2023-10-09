@@ -85,6 +85,11 @@ public class TipodeHabitacion {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    @Override
+    public String toString() {
+        return "TipodeHabitacion{" + "idTipoHabitacion=" + idTipoHabitacion + ", capacidad=" + capacidad + ", intcantCamas=" + intcantCamas + ", tipoCamas=" + tipoCamas + ", precioNoche=" + precioNoche + ", codigo=" + codigo + '}';
+    }
     
     
     

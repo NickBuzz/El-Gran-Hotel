@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Huespedes extends javax.swing.JPanel {
 
@@ -22,6 +23,8 @@ public class Huespedes extends javax.swing.JPanel {
         huespedList = HD.listarHuespedes();
         initComponents();
         armarCabecera();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
+        jtHuespedes.setRowSorter(sorter);
         updateTabla();
     }
 
@@ -41,8 +44,8 @@ public class Huespedes extends javax.swing.JPanel {
             modelo.removeRow(f);
         }
     }
-    
-    private void updateTabla(){
+
+    private void updateTabla() {
         borrarFilas();
         huespedList = HD.listarHuespedes();
         huespedList.forEach((Huesped) -> {
@@ -52,7 +55,7 @@ public class Huespedes extends javax.swing.JPanel {
                 Huesped.getCorreo(),
                 Huesped.getCelular(),
                 Huesped.getDomicilio(),
-                Huesped.isEstado()?"Activo" : "Inactivo"
+                Huesped.isEstado() ? "Activo" : "Inactivo"
             });
         });
     }
@@ -73,6 +76,8 @@ public class Huespedes extends javax.swing.JPanel {
         BEditar = new javax.swing.JButton();
         BNuevo = new javax.swing.JButton();
 
+        TextBuscar.setFont(new java.awt.Font("Bahnschrift", 1, 20)); // NOI18N
+        TextBuscar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         TextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextBuscarKeyReleased(evt);
@@ -86,6 +91,7 @@ public class Huespedes extends javax.swing.JPanel {
             }
         });
 
+        jtHuespedes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtHuespedes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -132,16 +138,17 @@ public class Huespedes extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(BEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(TextBuscar)
-                                .addGap(50, 50, 50)
-                                .addComponent(BActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(50, 50, 50))
+                                .addGap(55, 55, 55)
+                                .addComponent(BActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +179,7 @@ public class Huespedes extends javax.swing.JPanel {
                     Huesped.getCorreo(),
                     Huesped.getCelular(),
                     Huesped.getDomicilio(),
-                    Huesped.isEstado()?"Activo" : "Inactivo"
+                    Huesped.isEstado() ? "Activo" : "Inactivo"
                 });
             }
         });
@@ -187,12 +194,12 @@ public class Huespedes extends javax.swing.JPanel {
 
     private void BEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditarActionPerformed
         int seleccion = jtHuespedes.getSelectedRow();
-        if (seleccion != -1){
+        if (seleccion != -1) {
             Object valor = jtHuespedes.getValueAt(seleccion, 0);
             int dni = (int) valor;
             Huesped parametro = HD.buscarHuespedPorDni(dni);
             Menu.showJPanel(this, new HuespedesFormulario(parametro));
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione el huesped a editar.");
         }
     }//GEN-LAST:event_BEditarActionPerformed
@@ -203,13 +210,13 @@ public class Huespedes extends javax.swing.JPanel {
 
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
         int seleccion = jtHuespedes.getSelectedRow();
-        if (seleccion != -1){
+        if (seleccion != -1) {
             Object valor = jtHuespedes.getValueAt(seleccion, 0);
             int dni = (int) valor;
             Huesped parametro = HD.buscarHuespedPorDni(dni);
             HD.eliminarHuesped(parametro.getIdHuesped());
             updateTabla();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione el huesped a borrar.");
         }
     }//GEN-LAST:event_BBorrarActionPerformed

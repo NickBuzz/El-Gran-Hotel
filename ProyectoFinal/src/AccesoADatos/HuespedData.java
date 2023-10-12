@@ -1,6 +1,6 @@
 package AccesoADatos;
 
-import Entidades.huesped;
+import Entidades.Huesped;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class HuespedData {
         con = Conexion.getConexion();
     }
 
-    public void guardarHuesped(huesped huesped) {
+    public void guardarHuesped(Huesped huesped) {
         String sql = "INSERT INTO huesped(nombre, dni, correo, celular, domicilio, estado)"
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try {
@@ -41,7 +41,7 @@ public class HuespedData {
         }
     }
 
-    public void modificarHuesped(huesped huesped) {
+    public void modificarHuesped(Huesped huesped) {
         String sql = "UPDATE huesped SET nombre =?, dni =?, correo =?, celular =?, domicilio =?, estado =? "
                 + "WHERE IdHuesped =?";
         try {
@@ -77,8 +77,8 @@ public class HuespedData {
 
     }
     
-    public huesped buscarHuesped(int id) {
-        huesped huesped = null;
+    public Huesped buscarHuesped(int id) {
+        Huesped huesped = null;
         String sql = "SELECT nombre, dni, correo, celular, domicilio, estado FROM huesped WHERE IdHuesped = ? AND estado = 1";
         PreparedStatement ps = null;
         try {
@@ -86,7 +86,7 @@ public class HuespedData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                huesped = new huesped();
+                huesped = new Huesped();
                 huesped.setIdHuesped(id);
                 huesped.setNombre(rs.getString("nombre"));                               
                 huesped.setDni(rs.getInt("dni"));
@@ -104,8 +104,8 @@ public class HuespedData {
         return huesped;
     }
 
-    public huesped buscarHuespedPorDni(int dni) {
-        huesped huesped = null;
+    public Huesped buscarHuespedPorDni(int dni) {
+        Huesped huesped = null;
         String sql = "SELECT idHuesped, nombre, dni, correo, celular, domicilio, estado FROM huesped WHERE dni = ?";
         PreparedStatement ps = null;
         try {
@@ -113,7 +113,7 @@ public class HuespedData {
             ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                huesped = new huesped();
+                huesped = new Huesped();
                 huesped.setIdHuesped(rs.getInt("IdHuesped"));
                 huesped.setNombre(rs.getString("nombre"));                               
                 huesped.setDni(rs.getInt("dni"));
@@ -131,14 +131,14 @@ public class HuespedData {
         return huesped;
     }
     
-    public List<huesped> listarHuespedes() {
-        List<huesped> huespedes = new ArrayList<>();
+    public List<Huesped> listarHuespedes() {
+        List<Huesped> huespedes = new ArrayList<>();
         try {
             String sql = "SELECT * FROM huesped";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                huesped huesped = new huesped();
+                Huesped huesped = new Huesped();
                 huesped.setIdHuesped(rs.getInt("IdHuesped"));
                 huesped.setNombre(rs.getString("nombre"));
                 huesped.setDni(rs.getInt("dni"));

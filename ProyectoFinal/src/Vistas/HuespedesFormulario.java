@@ -1,21 +1,21 @@
 package Vistas;
 
 import AccesoADatos.HuespedData;
-import Entidades.huesped;
+import Entidades.Huesped;
 import javax.swing.JOptionPane;
 
 public class HuespedesFormulario extends javax.swing.JPanel {
 
-    private huesped huesped;
+    private Huesped huesped;
     private final HuespedData HD;
 
     public HuespedesFormulario() {
         this.HD = new HuespedData();
-        this.huesped = new huesped();
+        this.huesped = new Huesped();
         initComponents();
     }
 
-    public HuespedesFormulario(huesped huesped) {
+    public HuespedesFormulario(Huesped huesped) {
         this.HD = new HuespedData();
         this.huesped = huesped;
         initComponents();
@@ -207,7 +207,7 @@ public class HuespedesFormulario extends javax.swing.JPanel {
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
         
-        huesped check = new huesped();
+        Huesped check = new Huesped();
         check.setDni(huesped.getDni());
         
         int dni = TextDocumento.getText().isEmpty() ? 0 : Integer.parseInt(TextDocumento.getText());
@@ -279,7 +279,7 @@ public class HuespedesFormulario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TextNombreKeyTyped
 
-    private void llenarFormulario(huesped h) {
+    private void llenarFormulario(Huesped h) {
         TextDocumento.setText(Integer.toString(h.getDni()));
         TextNombre.setText(h.getNombre());
         TextCorreo.setText(h.getCorreo());

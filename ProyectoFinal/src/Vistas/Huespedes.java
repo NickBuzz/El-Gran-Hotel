@@ -1,6 +1,6 @@
 package Vistas;
 
-import Entidades.huesped;
+import Entidades.Huesped;
 import AccesoADatos.HuespedData;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Huespedes extends javax.swing.JPanel {
         }
     };
     private final HuespedData HD;
-    private List<huesped> huespedList = new ArrayList();
+    private List<Huesped> huespedList = new ArrayList();
 
     public Huespedes() {
         this.HD = new HuespedData();
@@ -61,7 +61,7 @@ public class Huespedes extends javax.swing.JPanel {
         });
     }
 
-    private void llenarModelo(huesped huesped) {
+    private void llenarModelo(Huesped huesped) {
         modelo.addRow(new Object[]{
             huesped.getDni(),
             huesped.getNombre(),
@@ -241,7 +241,7 @@ public class Huespedes extends javax.swing.JPanel {
         if (seleccion != -1) {
             Object valor = jtHuespedes.getValueAt(seleccion, 0);
             int dni = (int) valor;
-            huesped parametro = HD.buscarHuespedPorDni(dni);
+            Huesped parametro = HD.buscarHuespedPorDni(dni);
             Menu.showJPanel(this, new HuespedesFormulario(parametro));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione el huesped a editar.");
@@ -257,7 +257,7 @@ public class Huespedes extends javax.swing.JPanel {
         if (seleccion != -1) {
             Object valor = jtHuespedes.getValueAt(seleccion, 0);
             int dni = (int) valor;
-            huesped parametro = HD.buscarHuespedPorDni(dni);
+            Huesped parametro = HD.buscarHuespedPorDni(dni);
             HD.eliminarHuesped(parametro.getIdHuesped());
             updateTabla();
         } else {

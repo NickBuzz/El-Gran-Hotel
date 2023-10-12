@@ -1,7 +1,7 @@
 
 package Entidades;
 
-public class Huesped {
+public class huesped {
     private int IdHuesped;
     private String nombre;
     private int dni;
@@ -10,10 +10,10 @@ public class Huesped {
     private String domicilio;
     private boolean estado;
 
-    public Huesped() {
+    public huesped() {
     }
 
-    public Huesped(int IdHuesped, String nombre, int dni, String correo, long celular, String domicilio, boolean estado) {
+    public huesped(int IdHuesped, String nombre, int dni, String correo, long celular, String domicilio, boolean estado) {
         this.IdHuesped = IdHuesped;
         this.nombre = nombre;
         this.dni = dni;
@@ -23,7 +23,7 @@ public class Huesped {
         this.estado = estado;
     }
 
-    public Huesped(String nombre, int dni, String correo, long celular, String domicilio, boolean estado) {
+    public huesped(String nombre, int dni, String correo, long celular, String domicilio, boolean estado) {
         this.nombre = nombre;
         this.dni = dni;
         this.correo = correo;

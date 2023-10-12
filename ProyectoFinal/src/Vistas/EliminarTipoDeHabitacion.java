@@ -49,11 +49,6 @@ public class EliminarTipoDeHabitacion extends javax.swing.JPanel {
 
         jlBuscarPorID.setText("BUSCAR POR ID");
 
-        jtBuscarPorID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtBuscarPorIDActionPerformed(evt);
-            }
-        });
         jtBuscarPorID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtBuscarPorIDKeyReleased(evt);
@@ -122,10 +117,6 @@ public class EliminarTipoDeHabitacion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtBuscarPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBuscarPorIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtBuscarPorIDActionPerformed
-
     private void jtBuscarPorIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarPorIDKeyTyped
 
         char validar = evt.getKeyChar();
@@ -142,7 +133,7 @@ public class EliminarTipoDeHabitacion extends javax.swing.JPanel {
     }//GEN-LAST:event_jtBuscarPorIDKeyTyped
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-
+        
         int filaS = jtTablaTipoDeHabitacion.getSelectedRow();
 
         if (filaS == -1) {

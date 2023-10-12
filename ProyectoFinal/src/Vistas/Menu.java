@@ -176,7 +176,7 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(CabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CabeceraLayout.createSequentialGroup()
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addComponent(jSeparator5)
                         .addGap(995, 995, 995))
                     .addGroup(CabeceraLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

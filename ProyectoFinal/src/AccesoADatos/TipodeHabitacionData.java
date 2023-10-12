@@ -29,15 +29,15 @@ public class TipodeHabitacionData {
         
     }
 
-    //cambiar precio por codigo
+    //cambiar precio por ID
     public void cambiarPrecio(TipodeHabitacion tipohabitacion){
         
         String sql = "UPDATE tipohabitacion SET PrecioNoche=?"
-                + "WHERE codigo=?";
+                + "WHERE IdTipoHabitacion=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, tipohabitacion.getPrecioNoche());
-            ps.setString(2, tipohabitacion.getCodigo());
+            ps.setInt(2, tipohabitacion.getIdTipoHabitacion());
             int exito = ps.executeUpdate();
             if (exito >= 1) {
                 JOptionPane.showMessageDialog(null, "precio acutalizado con exito");

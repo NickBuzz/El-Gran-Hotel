@@ -40,7 +40,7 @@ public class TipodeHabitacionData {
             ps.setInt(2, tipohabitacion.getIdTipoHabitacion());
             int exito = ps.executeUpdate();
             if (exito >= 1) {
-                JOptionPane.showMessageDialog(null, "precio acutalizado con exito");
+                JOptionPane.showMessageDialog(null, "precio actualizado con exito");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexion: " + ex.getMessage());

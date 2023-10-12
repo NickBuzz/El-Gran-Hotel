@@ -24,6 +24,7 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jpContenido = new javax.swing.JPanel();
         jtNuevoTipoDeHabitacion = new javax.swing.JToggleButton();
         jtEliminarTipoDeHabitacion = new javax.swing.JToggleButton();
@@ -40,6 +41,7 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
             .addGap(0, 500, Short.MAX_VALUE)
         );
 
+        buttonGroup1.add(jtNuevoTipoDeHabitacion);
         jtNuevoTipoDeHabitacion.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jtNuevoTipoDeHabitacion.setText("NUEVO TIPO DE HABITACION");
         jtNuevoTipoDeHabitacion.addActionListener(new java.awt.event.ActionListener() {
@@ -48,6 +50,7 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(jtEliminarTipoDeHabitacion);
         jtEliminarTipoDeHabitacion.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jtEliminarTipoDeHabitacion.setText("ELIMINAR TIPO DE HABITACION");
         jtEliminarTipoDeHabitacion.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +59,7 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(jtEliminarTipoDeHabitacion1);
         jtEliminarTipoDeHabitacion1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jtEliminarTipoDeHabitacion1.setText("ACTUALIZAR PRECIO");
         jtEliminarTipoDeHabitacion1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +118,7 @@ public class CargarTipoDeHabitacion extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel jpContenido;
     private javax.swing.JToggleButton jtEliminarTipoDeHabitacion;
     private javax.swing.JToggleButton jtEliminarTipoDeHabitacion1;

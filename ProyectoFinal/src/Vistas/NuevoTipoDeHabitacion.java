@@ -26,6 +26,7 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jlCapacidad = new javax.swing.JLabel();
         jlCantidadDeCamas = new javax.swing.JLabel();
         jtbLimpiarCampos = new javax.swing.JToggleButton();
@@ -45,6 +46,7 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
 
         jlCantidadDeCamas.setText("CANTIDAD DE CAMAS");
 
+        buttonGroup1.add(jtbLimpiarCampos);
         jtbLimpiarCampos.setText("Limpiar campos");
         jtbLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +54,7 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
             }
         });
 
+        buttonGroup1.add(jtbCrear);
         jtbCrear.setText("Crear");
         jtbCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,6 +276,7 @@ public class NuevoTipoDeHabitacion extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jcTipoDeCamas;
     private javax.swing.JComboBox<String> jcTipoDeHabitacion;
     private javax.swing.JLabel jlCantidadDeCamas;

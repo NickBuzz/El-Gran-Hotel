@@ -30,7 +30,7 @@ public class ReservaData {
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           
+
             ps.setDate(1, Date.valueOf(reserva.getFechaEntrada()));
             ps.setDate(2, Date.valueOf(reserva.getFechaSalida()));
             ps.setInt(3, reserva.getCantidadPerso());
@@ -143,7 +143,7 @@ public class ReservaData {
     public void eliminarReserva(int IdReserva) {
         String sql = " UPDATE reserva SET Estado = 0 WHERE IdReserva = ? ";
         try {
-            PreparedStatement ps = con.prepareStatement(sql); 
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, IdReserva);
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -151,4 +151,32 @@ public class ReservaData {
         }
 
     }
+
+    public Reserva buscarReservaPorId(int IdReserva) {
+        Reserva reserva = null;
+        String sql = "SELECT * FROM reserva WHERE IdReserva = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, IdReserva);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                reserva = new Reserva();
+                reserva.setIdReserva(rs.getInt("IdReserva"));
+                reserva.setFechaEntrada(rs.getDate("FechaEntrada").toLocalDate());
+                reserva.setFechaSalida(rs.getDate("FechaSalida").toLocalDate());
+                reserva.setCantidadPerso(rs.getInt("CantidadPerso"));
+                reserva.setMonto(rs.getDouble("Monto"));
+                reserva.setEstado(rs.getBoolean("Estado"));
+                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt("IdHuesped")));
+                reserva.setHabitacion(habiData.buscarHabitacion(rs.getInt("IdHabitacion")));
+
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se a podido acceder a la tabla reserva" + ex.getMessage());
+        }
+
+        return reserva;
+    }
+
 }

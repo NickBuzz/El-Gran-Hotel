@@ -73,6 +73,11 @@ public class Huespedes extends javax.swing.JPanel {
         BEditar = new javax.swing.JButton();
         BNuevo = new javax.swing.JButton();
 
+        TextBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextBuscarActionPerformed(evt);
+            }
+        });
         TextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextBuscarKeyReleased(evt);
@@ -213,6 +218,10 @@ public class Huespedes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Seleccione el huesped a borrar.");
         }
     }//GEN-LAST:event_BBorrarActionPerformed
+
+    private void TextBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

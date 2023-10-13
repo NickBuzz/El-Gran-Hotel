@@ -30,6 +30,7 @@ public class ReservaData {
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           
             ps.setDate(1, Date.valueOf(reserva.getFechaEntrada()));
             ps.setDate(2, Date.valueOf(reserva.getFechaSalida()));
             ps.setInt(3, reserva.getCantidadPerso());
@@ -42,7 +43,7 @@ public class ReservaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
 
-                reserva.setIdReserva(1);
+                reserva.setIdReserva(rs.getInt(1));
                 System.out.println("Reserva Guardada Con Exito");
 
             } else {

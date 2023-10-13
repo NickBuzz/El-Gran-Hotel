@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class HabitacionData {
     
-    TipodeHabitacion tipoDeHabitacion = new TipodeHabitacion();
+    TipodeHabitacionData tipoDeHabitacionData = new TipodeHabitacionData();
     private Connection con = null;
 
     public HabitacionData() {
@@ -32,15 +32,18 @@ public class HabitacionData {
     public void guardarHabitacion(Habitacion habitacion) {
         String sql = "INSERT INTO habitaciones (numero, piso, estado,IdTipoHabitacion) "
                 + "VALUES (?, ?, ?, ?)";
+        
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+               PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+         
             ps.setInt(1, habitacion.getNumero());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.isEstado()?1:0);
-            ps.setInt(4, habitacion.getIdTDHabitacion());
+            ps.setInt(4, habitacion.getIdTDHabitacion().getIdTipoHabitacion());
   
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+           
             if (rs.next()) {
                 habitacion.setIdHabitacion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Habitacion guardada");
@@ -52,14 +55,16 @@ public class HabitacionData {
     }
 
     public void modificarHabitacion(Habitacion habitacion) {
-        String sql = "UPDATE habitaciones SET numero =?, piso =?, estado =?, IdTipoHabitacion= ? "
-                + "WHERE IdHabitacion =?";
+        String sql = " UPDATE habitaciones SET numero =?, piso =?, estado =?, IdTipoHabitacion =? "
+                + " WHERE IdHabitacion =?";
         try {
+            System.out.println(habitacion.getIdHabitacion()+" id -" + habitacion.getIdTipoHabitacion() +"idtdh-"+ habitacion.getNumero()+"-"+habitacion.getPiso()+"-"+ habitacion.isEstado());
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, habitacion.getNumero());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.isEstado()?1:0);
-           ps.setInt(4, habitacion.getIdTDHabitacion());
+           ps.setInt(4, habitacion.getIdTipoHabitacion());
+           ps.setInt(5, habitacion.getIdHabitacion());
         
             int exito = ps.executeUpdate();
             if (exito >= 1) {
@@ -87,7 +92,7 @@ public class HabitacionData {
     
     public Habitacion buscarHabitacion(int id) {
         Habitacion habitacion = null;
-        String sql = "SELECT numero, piso, estado, IdTipoHabitacion FROM habitaciones WHERE IdHabitacion = ? AND estado = 1";
+        String sql = "SELECT IdHabitacion, numero, piso, estado, IdTipoHabitacion FROM habitaciones WHERE IdHabitacion = ? AND estado = 1 ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -95,11 +100,12 @@ public class HabitacionData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 habitacion = new Habitacion();
-                habitacion.setIdHabitacion(id);
+                habitacion.setIdHabitacion(rs.getInt("IdHabitacion"));
                 habitacion.setNumero(rs.getInt("numero"));                               
                 habitacion.setPiso(rs.getInt("piso"));
                 habitacion.setEstado(rs.getBoolean("estado"));
-//                habitacion.setTipoDeHabitacion(tipoDeHabitacion..buscarMateria(rs.getInt("idMateria")));//////////////////// falta metodo en tipo de habitacion para poder acceder
+                habitacion.setIdTDHabitacion(tipoDeHabitacionData.buscarTipoHabitacion(rs.getInt("IdTipoHabitacion")));
+                System.out.println(habitacion.getPiso() + "piso");
            
                 
             
@@ -113,9 +119,9 @@ public class HabitacionData {
         return habitacion;
     }
 
-    public Habitacion buscarHuespedPorNumero(int numero) {
+    public Habitacion buscarHabitacionPorNumero(int numero) {
         Habitacion habitacion = null;
-        String sql = "SELECT idHabitacion, numero, piso, estado, IdTipoHabitacion,  FROM habitaciones WHERE numero = ?";
+        String sql = "SELECT idHabitacion, numero, piso, estado, IdTipoHabitacion FROM habitaciones WHERE numero = ? ";
         PreparedStatement ps = null;
        
         try {
@@ -127,7 +133,7 @@ public class HabitacionData {
                 habitacion.setIdHabitacion(rs.getInt("IdHabitacion"));
                 habitacion.setNumero(rs.getInt("numero"));                               
                 habitacion.setEstado(rs.getBoolean("estado"));
-//                habitacion.setTipoDeHabitacion(tipoDeHabitacion.getCodigo());///////////////////////////////////////////////falta metodo en tipo de habitacion para poder acceder
+                habitacion.setIdTDHabitacion(tipoDeHabitacionData.buscarTipoHabitacion(rs.getInt("IdTipoHabitacion")));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe la habitacion con ese numero");
             }
@@ -150,7 +156,7 @@ public class HabitacionData {
                 habitacion.setNumero(rs.getInt("numero"));
                 habitacion.setPiso(rs.getInt("piso"));
                 habitacion.setEstado(rs.getBoolean("estado"));         
-             ///////////////////////////////////////////////////////////////////////////////////////////////////falta metodo en tipo de habitacion para poder acceder
+                habitacion.setIdTDHabitacion(tipoDeHabitacionData.buscarTipoHabitacion(rs.getInt("IdTipoHabitacion")));
         
                 habitaciones.add(habitacion);
             }

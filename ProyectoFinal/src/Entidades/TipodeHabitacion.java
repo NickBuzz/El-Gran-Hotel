@@ -102,7 +102,13 @@ public class TipodeHabitacion {
 
     @Override
     public String toString() {
-        return "TipodeHabitacion{" + "idTipoHabitacion=" + idTipoHabitacion + ", capacidad=" + capacidad + ", intcantCamas=" + intcantCamas + ", tipoCamas=" + tipoCamas + ", precioNoche=" + precioNoche + ", codigo=" + codigo + ", nombre=" + nombre + '}';
+        return "TipodeHabitacion : "+ "Codigo = " + codigo + "."
+                + " Nombre = " + nombre  + "."
+                + " ID " + idTipoHabitacion + ". "
+                + "Capacidad" + capacidad + " Pers. "
+                + "Camas = " + intcantCamas 
+                + ". Tipos de cama/s = " + tipoCamas + ". "
+                + "PpNoche= $" + precioNoche ;
     }
     
     

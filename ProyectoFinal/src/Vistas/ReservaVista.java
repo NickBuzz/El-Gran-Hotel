@@ -1,4 +1,3 @@
-
 package Vistas;
 
 import AccesoADatos.ReservaData;
@@ -8,29 +7,26 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class ReservaVista extends javax.swing.JPanel {
- private DefaultTableModel modelo = new DefaultTableModel() {
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
-            
-        
+
             return false;
-           }  
-        };
- private final ReservaData RD;
- private List<Reserva> reservaList =new ArrayList<>();
- 
-   
+        }
+    };
+    private final ReservaData RD;
+    private List<Reserva> reservaList = new ArrayList<>();
+
     public ReservaVista() {
         this.RD = new ReservaData();
         reservaList = RD.obtenerReservas();
-         initComponents();
-         armarCabecera();
-         updateTabla();
-         
+        initComponents();
+        armarCabecera();
+        updateTabla();
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -183,60 +179,71 @@ public class ReservaVista extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarTablaActionPerformed
-     borrarFilas();
-     updateTabla();
+        borrarFilas();
+        updateTabla();
     }//GEN-LAST:event_jbActualizarTablaActionPerformed
 
     private void jbNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaReservaActionPerformed
-Menu.showJPanel(this, new GuardarReserva());
+        Menu.showJPanel(this, new GuardarReserva());
     }//GEN-LAST:event_jbNuevaReservaActionPerformed
 
     private void jbactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbactualizarActionPerformed
-    int seleccion = jtReservas.getSelectedRow();
-    if(seleccion != -1){
-         Object valor = jtReservas.getValueAt(seleccion, 0);
-           int idReserva =(int ) valor;
-           Reserva parametro =RD.buscarReservaPorId(idReserva);
-           Menu.showJPanel(this,new ModificarReserva());      
-    }else {
-        JOptionPane.showMessageDialog(null, "Seleccione la reserva a Modificar");
-    }
+        int seleccion = jtReservas.getSelectedRow();
+        if (seleccion != -1) {
+            Object valor = jtReservas.getValueAt(seleccion, 0);
+            int idReserva = (int) valor;
+            Reserva parametro = RD.buscarReservaPorId(idReserva);
+            Menu.showJPanel(this, new ModificarReserva());
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione la reserva a Modificar");
+        }
     }//GEN-LAST:event_jbactualizarActionPerformed
 
     private void jbborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbborrarActionPerformed
-       int seleccion = jtReservas.getSelectedRow();
-       if(seleccion != -1){
-           Object valor = jtReservas.getValueAt(seleccion, 0);
-           int idReserva =(int ) valor;
-           Reserva parametro =RD.buscarReservaPorId(idReserva);
-           RD.eliminarReserva(parametro.getIdReserva());
-           updateTabla();
-           
-       }else {
-           JOptionPane.showMessageDialog(null, "Seleccione la reserva a borrar.");
-       }
+        int seleccion = jtReservas.getSelectedRow();
+        if (seleccion != -1) {
+            Object valor = jtReservas.getValueAt(seleccion, 0);
+            int idReserva = (int) valor;
+            Reserva parametro = RD.buscarReservaPorId(idReserva);
+            RD.eliminarReserva(parametro.getIdReserva());
+            updateTabla();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione la reserva a borrar.");
+        }
 
     }//GEN-LAST:event_jbborrarActionPerformed
 
     private void jtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBuscarActionPerformed
-  
+
     }//GEN-LAST:event_jtBuscarActionPerformed
 
     private void jtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarKeyReleased
-      borrarFilas();
-      reservaList = RD.obtenerReservas();
-    reservaList.forEach((reserva) -> {
-        modelo.addRow(new Object[]{
-            reserva.getIdReserva(),
-            reserva.getFechaEntrada(),
-            reserva.getFechaSalida(),
-            reserva.getCantidadPerso(),
-            reserva.getMonto(),
-            reserva.isEstado() ? "Activa" : "Inactiva",
-            reserva.getHuesped().getIdHuesped(),
-            reserva.getHabitacion().getIdHabitacion()
+
+        borrarFilas();
+        String textoBusqueda = jtBuscar.getText().trim().toLowerCase();
+        reservaList = RD.obtenerReservas();
+
+        reservaList.forEach((reserva) -> {
+            String nombreHuesped = reserva.getHuesped().getNombre().toLowerCase();
+            int idReserva = reserva.getIdReserva();
+
+            // Comprobar si el texto de búsqueda coincide con el nombre del huésped o el ID de la reserva
+            if (nombreHuesped.contains(textoBusqueda) || String.valueOf(idReserva).contains(textoBusqueda)) {
+                modelo.addRow(new Object[]{
+                    reserva.getIdReserva(),
+                    reserva.getFechaEntrada(),
+                    reserva.getFechaSalida(),
+                    reserva.getCantidadPerso(),
+                    reserva.getMonto(),
+                    reserva.isEstado() ? "Activa" : "Inactiva",
+                    reserva.getHuesped().getIdHuesped(),
+                    reserva.getHabitacion().getIdHabitacion()
+                });
+            }
         });
-    });
+    
+
     }//GEN-LAST:event_jtBuscarKeyReleased
 
 
@@ -287,4 +294,5 @@ private void updateTabla() {
         });
     });
 }
+
 }

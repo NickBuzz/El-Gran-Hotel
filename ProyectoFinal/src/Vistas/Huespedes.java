@@ -70,6 +70,7 @@ public class Huespedes extends javax.swing.JPanel {
             huesped.getDomicilio(),
             huesped.isEstado() ? "Activo" : "Inactivo"
         });
+        
     }
 
     /**
@@ -219,6 +220,7 @@ public class Huespedes extends javax.swing.JPanel {
                 if (dni.startsWith(TextBuscar.getText())) {
                     llenarModelo(Huesped);
                 }
+                
             }
             if (checkNombre.isSelected()) {
                 String nombre = Huesped.getNombre();
@@ -270,6 +272,7 @@ public class Huespedes extends javax.swing.JPanel {
                 evt.consume();
             }
         }
+        
         if (checkNombre.isSelected()) {
             if (!Character.isLetter(c) && c != ' ') {
                 evt.consume();

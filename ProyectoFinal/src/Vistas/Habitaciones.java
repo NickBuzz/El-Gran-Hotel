@@ -218,7 +218,6 @@ public class Habitaciones extends javax.swing.JPanel {
                     jTpiso.setText(Integer.toString(habita.getPiso()));
                     jChactivo.setSelected(habita.isEstado());
                     jBeliminar.setEnabled(true);
-                    System.out.println("idtipohabitacion en habitaciones: " + habita.getIdTDHabitacion());
                     jCcodigotipohab.setSelectedIndex(habita.getIdTipoHabitacion());
                     
 
@@ -249,9 +248,9 @@ public class Habitaciones extends javax.swing.JPanel {
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         if(jCcodigotipohab.isEnabled() && jChactivo.isEnabled() ){
         int num = parseInt(jTnumero.getText());
-         System.out.println(num +  " num " + 2);
+      
         int piso = Integer.parseInt(jTpiso.getText());
-        
+           System.out.println(num + "piso en habitaciones guardar");
         boolean act = jChactivo.isSelected();
         int index = jCcodigotipohab.getSelectedIndex();
         int idTDH =jCcodigotipohab.getItemAt(index).getIdTipoHabitacion();

@@ -179,10 +179,8 @@ public class Huespedes extends javax.swing.JPanel {
     }//GEN-LAST:event_TextBuscarKeyReleased
 
     private void BActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActualizarActionPerformed
-
         borrarFilas();
         updateTabla();
-
     }//GEN-LAST:event_BActualizarActionPerformed
 
     private void BEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditarActionPerformed

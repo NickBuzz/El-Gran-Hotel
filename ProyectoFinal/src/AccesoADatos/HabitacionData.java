@@ -30,19 +30,19 @@ public class HabitacionData {
     }
 
     public void guardarHabitacion(Habitacion habitacion) {
-        String sql = "INSERT INTO habitaciones (numero, piso, estado, IdTipoHabitacion) "
+        String sql = "INSERT INTO habitaciones(numero, piso, estado, IdTipoHabitacion) "
                 + "VALUES (?, ?, ?, ?)";
         
         try {
                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     
            
-         
+          System.out.println(  habitacion.getIdTipoHabitacion() +" idtdh-"+ habitacion.getNumero()+"-"+habitacion.getPiso()+"-"+ habitacion.isEstado());
             ps.setInt(1, habitacion.getNumero());
             ps.setInt(2, habitacion.getPiso());
             ps.setInt(3, habitacion.isEstado()?1:0);
-            ps.setInt(4, habitacion.getIdTDHabitacion().getIdTipoHabitacion());
-              ps.executeUpdate();
+            ps.setInt(4, habitacion.getIdTipoHabitacion());
+            ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
            
@@ -52,7 +52,7 @@ public class HabitacionData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de conexion: " + ex.getMessage() + " ." );
+            JOptionPane.showMessageDialog(null, "Error de conexion en habitaciondata.guardarHabitacion: " + ex.getMessage() + " ." );
             ex.printStackTrace();
         }
     }

@@ -94,11 +94,6 @@ public class Huespedes extends javax.swing.JPanel {
         checkNombre = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
 
-        TextBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextBuscarActionPerformed(evt);
-            }
-        });
         TextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextBuscarKeyReleased(evt);

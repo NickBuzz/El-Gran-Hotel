@@ -94,6 +94,11 @@ public class Huespedes extends javax.swing.JPanel {
         checkNombre = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
 
+        TextBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextBuscarActionPerformed(evt);
+            }
+        });
         TextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 TextBuscarKeyReleased(evt);
@@ -249,7 +254,9 @@ public class Huespedes extends javax.swing.JPanel {
     }//GEN-LAST:event_BEditarActionPerformed
 
     private void BNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BNuevoActionPerformed
+
         Menu.showJPanel(this, new HuespedesFormulario());
+
     }//GEN-LAST:event_BNuevoActionPerformed
 
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
@@ -265,6 +272,7 @@ public class Huespedes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_BBorrarActionPerformed
 
+
     private void TextBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextBuscarKeyTyped
         char c = evt.getKeyChar();
         if (checkDni.isSelected()) {
@@ -279,6 +287,7 @@ public class Huespedes extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_TextBuscarKeyTyped
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

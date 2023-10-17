@@ -8,12 +8,16 @@ package AccesoADatos;
 import Entidades.Habitacion;
 import Entidades.TipodeHabitacion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -170,7 +174,65 @@ public class HabitacionData {
         }
         return habitaciones;
     }
+public List<Habitacion> obtenerTipoHabitacion(int idTipoHabitacion,boolean disponible){
+    List<Habitacion> habitaciones = new ArrayList<>();
+    String sql=" SELECT * FROM habitaciones WHERE idTipoHabitacion =? AND estado =?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idTipoHabitacion);
+            ps.setInt(2, disponible ? 1:0);
+           ResultSet rs= ps.executeQuery();
+           while(rs.next()){
+               Habitacion habitacion =new Habitacion ();
+               habitacion.setIdHabitacion(rs.getInt("IdHabitacion"));
+               habitacion.setNumero(rs.getInt("numero"));
+               habitacion.setPiso(rs.getInt("piso"));
+               habitacion.setEstado(rs.getBoolean("estado"));
+               habitacion.setIdTDHabitacion(tipoDeHabitacionData .buscarTipoHabitacion(rs.getInt("idTipoHabitacion")));
+               habitaciones.add(habitacion);
+           }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla habitacion."+ex.getMessage());
+        }
+        return habitaciones;
+}
+
+
+ public List<Habitacion> obtenerHabitacionesDisponibles(int idTipoHabitacion, LocalDate fechaEntrada, LocalDate fechaSalida) {
+    List<Habitacion> habitacionesDisponibles = new ArrayList<>();
+    String sql = "SELECT * FROM habitacion WHERE estado = true AND idTipoHabitacion = ? AND IdHabitacion NOT IN ("
+                 + "SELECT IdHabitacion FROM reserva WHERE (FechaEntrada BETWEEN ? AND ?) OR (FechaSalida BETWEEN ? AND ?))";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idTipoHabitacion);
+        ps.setDate(2, Date.valueOf(fechaEntrada));
+        ps.setDate(3, Date.valueOf(fechaSalida));
+        ps.setDate(4, Date.valueOf(fechaEntrada));
+        ps.setDate(5, Date.valueOf(fechaSalida));
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Habitacion habitacion = new Habitacion();
+                habitacion.setIdHabitacion(rs.getInt("IdHabitacion"));
+                habitacion.setNumero(rs.getInt("Numero"));
+                habitacion.setPiso(rs.getInt("Piso"));
+                habitacion.setEstado(rs.getBoolean("estado"));
+                habitacion.setIdTDHabitacion(tipoDeHabitacionData.buscarTipoHabitacion(rs.getInt("idTipoHabitacion")));
+
+                habitacionesDisponibles.add(habitacion);
+            }
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla habitacion: " + ex.getMessage());
+    }
+
+    return habitacionesDisponibles;
+}
+
+    }
+
 
     
     
-}
+

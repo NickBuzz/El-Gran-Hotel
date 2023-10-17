@@ -151,5 +151,57 @@ public class TipodeHabitacionData {
         }
         return tipodehabitaciones;
     }
+    public TipodeHabitacion buscarTipoHabitacionPorNombre(String nombre) {
+    TipodeHabitacion tipohabitacion = null;
+    String sql = "SELECT IdTipoHabitacion, Capacidad, CantCamas, TipoCamas, PrecioNoche, Codigo FROM tipohabitacion WHERE TipoCamas = ?";
+    PreparedStatement ps = null;
     
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            tipohabitacion = new TipodeHabitacion();
+            tipohabitacion.setIdTipoHabitacion(rs.getInt("IdTipoHabitacion"));
+            tipohabitacion.setCapacidad(rs.getInt("Capacidad"));
+            tipohabitacion.setIntcantCamas(rs.getInt("CantCamas"));
+            tipohabitacion.setTipoCamas(rs.getString("TipoCamas"));
+            tipohabitacion.setPrecioNoche(rs.getDouble("PrecioNoche"));
+            tipohabitacion.setCodigo(rs.getString("Codigo"));
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay un tipo de habitación registrado con ese nombre.");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitación: " + ex.getMessage());
+    }
+    
+    return tipohabitacion;
 }
+
+
+    public TipodeHabitacion obtenerTipoDeHabitacionPorNombre(String nombre) {
+        TipodeHabitacion tipodehabitacion = null;
+        String sql = "SELECT * FROM tipohabitacion WHERE TipoCamas = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                tipodehabitacion = new TipodeHabitacion();
+                tipodehabitacion.setIdTipoHabitacion(rs.getInt("IdTipoHabitacion"));
+                tipodehabitacion.setCapacidad(rs.getInt("Capacidad"));
+                tipodehabitacion.setIntcantCamas(rs.getInt("CantCamas"));
+                tipodehabitacion.setTipoCamas(rs.getString("TipoCamas"));
+                tipodehabitacion.setPrecioNoche(rs.getDouble("PrecioNoche"));
+                tipodehabitacion.setCodigo(rs.getString("Codigo"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitación: " + ex.getMessage());
+        }
+        return tipodehabitacion;
+    }
+}
+
+

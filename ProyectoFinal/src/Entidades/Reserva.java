@@ -14,7 +14,7 @@ public class Reserva {
     private boolean estado;
     private Huesped huesped;
     private Habitacion habitacion;
-
+private TipodeHabitacion tipoHabitacion;
     public Reserva() {
     }
 
@@ -58,6 +58,10 @@ public class Reserva {
 
     public LocalDate getFechaSalida() {
         return FechaSalida;
+    }
+
+    public void setTipoHabitacion(TipodeHabitacion tipoHabitacion) {
+        this.tipoHabitacion = tipoHabitacion;
     }
 
     public void setFechaSalida(LocalDate FechaSalida) {

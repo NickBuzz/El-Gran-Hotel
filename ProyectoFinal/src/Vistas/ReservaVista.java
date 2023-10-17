@@ -184,22 +184,31 @@ public class ReservaVista extends javax.swing.JPanel {
     }//GEN-LAST:event_jbActualizarTablaActionPerformed
 
     private void jbNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaReservaActionPerformed
+
         Menu.showJPanel(this, new GuardarReserva());
+
+
     }//GEN-LAST:event_jbNuevaReservaActionPerformed
 
     private void jbactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbactualizarActionPerformed
+//boton actualizar
         int seleccion = jtReservas.getSelectedRow();
         if (seleccion != -1) {
             Object valor = jtReservas.getValueAt(seleccion, 0);
             int idReserva = (int) valor;
-            Reserva parametro = RD.buscarReservaPorId(idReserva);
-            Menu.showJPanel(this, new ModificarReserva());
+            Reserva reservaSeleccionada = RD.buscarReservaPorId(idReserva);
+
+            Menu.showJPanel(this, new ModificarReserva(reservaSeleccionada));
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la reserva a Modificar");
         }
+
+
     }//GEN-LAST:event_jbactualizarActionPerformed
 
     private void jbborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbborrarActionPerformed
+
+        //boton borrar
         int seleccion = jtReservas.getSelectedRow();
         if (seleccion != -1) {
             Object valor = jtReservas.getValueAt(seleccion, 0);
@@ -209,7 +218,7 @@ public class ReservaVista extends javax.swing.JPanel {
             updateTabla();
 
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione la reserva a borrar.");
+            JOptionPane.showMessageDialog(null, "Seleccione la reserva a borrar ");
         }
 
     }//GEN-LAST:event_jbborrarActionPerformed
@@ -219,7 +228,7 @@ public class ReservaVista extends javax.swing.JPanel {
     }//GEN-LAST:event_jtBuscarActionPerformed
 
     private void jtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtBuscarKeyReleased
-
+//busqueda de reserva a medida que escribe 
         borrarFilas();
         String textoBusqueda = jtBuscar.getText().trim().toLowerCase();
         reservaList = RD.obtenerReservas();
@@ -239,10 +248,11 @@ public class ReservaVista extends javax.swing.JPanel {
                     reserva.isEstado() ? "Activa" : "Inactiva",
                     reserva.getHuesped().getIdHuesped(),
                     reserva.getHabitacion().getIdHabitacion()
+
                 });
             }
         });
-    
+//permite a los usuarios buscar reservas en funcion de su id y nombre
 
     }//GEN-LAST:event_jtBuscarKeyReleased
 
@@ -261,38 +271,41 @@ public class ReservaVista extends javax.swing.JPanel {
     private javax.swing.JTable jtReservas;
     // End of variables declaration//GEN-END:variables
 
-private void armarCabecera(){
-    modelo.addColumn("IdReserva");
-    modelo.addColumn("Fecha Entrada");
-    modelo.addColumn("Fecha Salida");
-    modelo.addColumn("Cantidad De Personas");
-    modelo.addColumn("Monto");
-    modelo.addColumn("IdHusped");
-    modelo.addColumn("Id Habitacion");
-    jtReservas.setModel(modelo);
- 
-}
-private void borrarFilas(){
-    int filas=jtReservas.getRowCount() -1;
-    for(int f=filas; f>=0;f--){
-        modelo.removeRow(f);
-    }  
-}
-private void updateTabla() {
-    borrarFilas();
-    reservaList = RD.obtenerReservas();
-    reservaList.forEach((reserva) -> {
-        modelo.addRow(new Object[]{
-            reserva.getIdReserva(),
-            reserva.getFechaEntrada(),
-            reserva.getFechaSalida(),
-            reserva.getCantidadPerso(),
-            reserva.getMonto(),
-            reserva.isEstado() ? "Activa" : "Inactiva",
-            reserva.getHuesped().getIdHuesped(),
-            reserva.getHabitacion().getIdHabitacion()
+    private void armarCabecera() {
+        modelo.addColumn("IdReserva");
+        modelo.addColumn("Fecha Entrada");
+        modelo.addColumn("Fecha Salida");
+        modelo.addColumn("Cantidad De Personas");
+        modelo.addColumn("Monto");
+        modelo.addColumn("IdHusped");
+        modelo.addColumn("Id Habitacion");
+        jtReservas.setModel(modelo);
+//armado de tabla 
+    }
+
+    private void borrarFilas() {
+        int filas = jtReservas.getRowCount() - 1;
+        for (int f = filas; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
+
+    private void updateTabla() {
+        borrarFilas();
+        reservaList = RD.obtenerReservas();
+        reservaList.forEach((reserva) -> {
+            modelo.addRow(new Object[]{
+                reserva.getIdReserva(),
+                reserva.getFechaEntrada(),
+                reserva.getFechaSalida(),
+                reserva.getCantidadPerso(),
+                reserva.getMonto(),
+                reserva.isEstado() ? "Activa" : "Inactiva",
+                reserva.getHuesped().getIdHuesped(),
+                reserva.getHabitacion().getIdHabitacion()
+            //refresca la tabla de reservas en la interfaz con los datos mas recientes
+            });
         });
-    });
-}
+    }
 
 }

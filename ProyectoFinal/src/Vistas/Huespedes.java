@@ -203,7 +203,7 @@ public class Huespedes extends javax.swing.JPanel {
     }//GEN-LAST:event_BEditarActionPerformed
 
     private void BNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BNuevoActionPerformed
-        Menu.showJPanel(this, new HuespedesNuevo());
+       Menu.showJPanel(this, new HuespedesNuevo());
     }//GEN-LAST:event_BNuevoActionPerformed
 
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed

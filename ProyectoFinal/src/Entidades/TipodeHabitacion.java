@@ -17,17 +17,31 @@ public class TipodeHabitacion {
     private String tipoCamas;
     private double precioNoche;
     private String codigo;
+    private NombreHabitacion nombre;
 
     public TipodeHabitacion() {
     }
 
-    public TipodeHabitacion(int capacidad, int intcantCamas, String tipoCamas, double precioNoche, String codigo) {
+    public TipodeHabitacion(int capacidad, int intcantCamas, String tipoCamas, double precioNoche, NombreHabitacion nombre) {
         this.capacidad = capacidad;
         this.intcantCamas = intcantCamas;
         this.tipoCamas = tipoCamas;
         this.precioNoche = precioNoche;
-        this.codigo = codigo;
+        this.codigo = nombre.toString();
+        
     }
+
+    public TipodeHabitacion(int idTipoHabitacion, int capacidad, int intcantCamas, String tipoCamas, double precioNoche, String codigo, NombreHabitacion nombre) {
+        this.idTipoHabitacion = idTipoHabitacion;
+        this.capacidad = capacidad;
+        this.intcantCamas = intcantCamas;
+        this.tipoCamas = tipoCamas;
+        this.precioNoche = precioNoche;
+       
+      
+    }
+    
+    
 
     public TipodeHabitacion(int idTipoHabitacion, int capacidad, int intcantCamas, String tipoCamas, double precioNoche, String codigo) {
         this.idTipoHabitacion = idTipoHabitacion;
@@ -84,6 +98,17 @@ public class TipodeHabitacion {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "TipodeHabitacion : "+ "Codigo = " + codigo + "."
+                + " Nombre = " + nombre  + "."
+                + " ID " + idTipoHabitacion + ". "
+                + "Capacidad" + capacidad + " Pers. "
+                + "Camas = " + intcantCamas 
+                + ". Tipos de cama/s = " + tipoCamas + ". "
+                + "PpNoche= $" + precioNoche ;
     }
     
     

@@ -15,23 +15,29 @@ public class Habitacion {
     private int numero;
     private int piso;
     private boolean estado;
-    TipodeHabitacion TipoDeHabitacion = new TipodeHabitacion();
+    private TipodeHabitacion IdTDHabitacion;
+    private int idTipoHabitacion;
     
     public Habitacion (){}
 
-    public Habitacion(int IdHabitacion, int numero, int piso, boolean estado) {
+    public Habitacion(int IdHabitacion, int numero, int piso, boolean estado, int idTipoHabitacion) {
         this.IdHabitacion = IdHabitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
+        this.idTipoHabitacion= idTipoHabitacion;
     }
     
-     public Habitacion( int numero, int piso, boolean estado) {
-
+     public Habitacion( int numero, int piso, boolean estado, int idTipoHabitacion ) {
+         this.IdHabitacion = IdHabitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
+         this.idTipoHabitacion= idTipoHabitacion;
+           
     }
+     
+    
 
     public int getIdHabitacion() {
         return IdHabitacion;
@@ -47,6 +53,14 @@ public class Habitacion {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public int getIdTipoHabitacion() {
+        return idTipoHabitacion;
+    }
+
+    public void setIdTipoHabitacion(int idTipoHabitacion) {
+        this.idTipoHabitacion = idTipoHabitacion;
     }
 
     public int getPiso() {
@@ -65,17 +79,21 @@ public class Habitacion {
         this.estado = estado;
     }
 
-    public TipodeHabitacion getTipoDeHabitacion() {
-        return TipoDeHabitacion;
+    public TipodeHabitacion getIdTDHabitacion() {
+        return IdTDHabitacion;
     }
 
-    public void setTipoDeHabitacion(TipodeHabitacion TipoDeHabitacion) {
-        this.TipoDeHabitacion = TipoDeHabitacion;
+    public void setIdTDHabitacion(TipodeHabitacion IdTDHabitacion) {
+        this.IdTDHabitacion = IdTDHabitacion;
     }
+
+  
+
+
 
     @Override
     public String toString() {
-        return "Habitacion{" + "IdHabitacion=" + IdHabitacion + ", numero=" + numero + ", piso=" + piso + ", estado=" + estado + ", TipoDeHabitacion=" + TipoDeHabitacion + '}';
+        return "Habitacion{" + "IdHabitacion=" + IdHabitacion + ", numero=" + numero + ", piso=" + piso + ", estado=" + estado + ", TipoDeHabitacion=" + IdTDHabitacion + '}';
     }
     
     

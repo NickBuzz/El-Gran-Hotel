@@ -1,23 +1,27 @@
-
 package Vistas;
 
 import AccesoADatos.HuespedData;
 import Entidades.Huesped;
+import javax.swing.JOptionPane;
 
-
-public class HuespedesEditar extends javax.swing.JPanel {
+public class HuespedesFormulario extends javax.swing.JPanel {
 
     private Huesped huesped;
     private final HuespedData HD;
-    
-    public HuespedesEditar(Huesped huesped) {
+
+    public HuespedesFormulario() {
+        this.HD = new HuespedData();
+        this.huesped = new Huesped();
+        initComponents();
+    }
+
+    public HuespedesFormulario(Huesped huesped) {
         this.HD = new HuespedData();
         this.huesped = huesped;
         initComponents();
         llenarFormulario(huesped);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -201,16 +205,43 @@ public class HuespedesEditar extends javax.swing.JPanel {
 
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
         
-        huesped.setDni(Integer.parseInt(TextDocumento.getText()));
-        huesped.setNombre(TextNombre.getText());
-        huesped.setCorreo(TextCorreo.getText());
-        huesped.setCelular(Long.parseLong(TextTelefono.getText()));
-        huesped.setDomicilio(TextDomicilio.getText());
-        huesped.setEstado(cboxEstado.isSelected());
+        Huesped check = new Huesped();
+        check.setDni(huesped.getDni());
         
-        HD.modificarHuesped(huesped);
-        limpiarFormulario();
-        Menu.showJPanel(this, new Huespedes());
+        int dni = TextDocumento.getText().isEmpty() ? 0 : Integer.parseInt(TextDocumento.getText());
+        String nombre = TextNombre.getText();
+        String correo = TextCorreo.getText();
+        long tel = TextTelefono.getText().isEmpty() ? 0 : Long.parseLong(TextTelefono.getText());
+        String domicilio = TextDomicilio.getText();
+
+        if (dni == 0 || nombre.isEmpty() || correo.isEmpty() || tel == 0 || domicilio.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los datos");
+            if (dni == 0) {
+                TextDocumento.requestFocus();
+            } else if (nombre.isEmpty()) {
+                TextNombre.requestFocus();
+            } else if (correo.isEmpty()) {
+                TextCorreo.requestFocus();
+            } else if (tel == 0) {
+                TextTelefono.requestFocus();
+            } else if (domicilio.isEmpty()) {
+                TextDomicilio.requestFocus();
+            }
+        } else {
+            huesped.setDni(dni);
+            huesped.setNombre(nombre);
+            huesped.setCorreo(correo);
+            huesped.setCelular(tel);
+            huesped.setDomicilio(domicilio);
+            huesped.setEstado(cboxEstado.isSelected());
+            if (check.getDni() == 0) {
+                HD.guardarHuesped(huesped);
+                Menu.showJPanel(this, new Huespedes());
+            } else {
+                HD.modificarHuesped(huesped);
+                Menu.showJPanel(this, new Huespedes());
+            }
+        }
     }//GEN-LAST:event_BGuardarActionPerformed
 
     private void cboxEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cboxEstadoStateChanged
@@ -227,7 +258,7 @@ public class HuespedesEditar extends javax.swing.JPanel {
 
     private void TextDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextDocumentoKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) || TextDocumento.getText().length() >= 8) {
             evt.consume();
         }
     }//GEN-LAST:event_TextDocumentoKeyTyped
@@ -241,12 +272,12 @@ public class HuespedesEditar extends javax.swing.JPanel {
 
     private void TextNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextNombreKeyTyped
         char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {
+        if (!Character.isLetter(c) && c != ' ') {
             evt.consume();
         }
     }//GEN-LAST:event_TextNombreKeyTyped
 
-    private void llenarFormulario(Huesped h){
+    private void llenarFormulario(Huesped h) {
         TextDocumento.setText(Integer.toString(h.getDni()));
         TextNombre.setText(h.getNombre());
         TextCorreo.setText(h.getCorreo());
@@ -254,8 +285,8 @@ public class HuespedesEditar extends javax.swing.JPanel {
         TextDomicilio.setText(h.getDomicilio());
         cboxEstado.setSelected(h.isEstado());
     }
-    
-    private void limpiarFormulario(){
+
+    private void limpiarFormulario() {
         TextDocumento.setText("");
         TextNombre.setText("");
         TextCorreo.setText("");

@@ -301,7 +301,8 @@ public class ReservaVista extends javax.swing.JPanel {
                 reserva.getCantidadPerso(),
                 reserva.getMonto(),
                 reserva.isEstado() ? "Activa" : "Inactiva",
-                reserva.getHuesped().getIdHuesped(),
+                
+               // reserva.getHuesped().getIdHuesped(),
                 reserva.getHabitacion().getIdHabitacion()
             //refresca la tabla de reservas en la interfaz con los datos mas recientes
             });

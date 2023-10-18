@@ -176,7 +176,7 @@ public class HabitacionData {
     }
 public List<Habitacion> obtenerTipoHabitacion(int idTipoHabitacion,boolean disponible){
     List<Habitacion> habitaciones = new ArrayList<>();
-    String sql=" SELECT * FROM habitaciones WHERE idTipoHabitacion =? AND estado =?";
+    String sql=" SELECT * FROM habitaciones WHERE idTipoHabitacion = ? AND estado = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idTipoHabitacion);

@@ -19,11 +19,24 @@ import javax.swing.table.DefaultTableModel;
 
 public class GuardarReserva extends javax.swing.JPanel {
 
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+
+            return false;
+
+        }
+    };
+    private HabitacionData habitacionData;
+    private TipodeHabitacionData tipoDeHabitacionData;
+
     public GuardarReserva() {
         initComponents();
         HuespedData huespedData = new HuespedData();
-        TipodeHabitacionData tipoDeHabitacionData = new TipodeHabitacionData();
         ReservaData reservaData = new ReservaData();
+        armarCabecera();
+        cargarTiposHabitacion();
+        HabitacionData habitacionData = new HabitacionData();
+        this.tipoDeHabitacionData = new TipodeHabitacionData();
 
     }
 
@@ -43,7 +56,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jdfeSalida = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
-        jcTipoHabitacion = new javax.swing.JComboBox<>();
+        jcTipoHabitacion = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JtHabitacionesDispo = new javax.swing.JTable();
@@ -76,7 +89,6 @@ public class GuardarReserva extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Tipo De Habitacion");
 
-        jcTipoHabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTipoHabitacionActionPerformed(evt);
@@ -122,7 +134,6 @@ public class GuardarReserva extends javax.swing.JPanel {
         jLabel10.setText("Estado");
 
         Jchekestado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Jchekestado.setText("jCheckBox1");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Codigo De Habitacion");
@@ -341,7 +352,7 @@ public class GuardarReserva extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jblimpiar;
-    private javax.swing.JComboBox<String> jcTipoHabitacion;
+    private javax.swing.JComboBox jcTipoHabitacion;
     private com.toedter.calendar.JDateChooser jdFentrada;
     private com.toedter.calendar.JDateChooser jdfeSalida;
     private javax.swing.JTextField jtCodigoHabitacion;
@@ -384,6 +395,31 @@ public class GuardarReserva extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al cargar habitaciones disponibles: " + ex.getMessage());
         }
+    }
+
+    private void armarCabecera() {
+        modelo.addColumn("IdHabitacion");
+        modelo.addColumn("numero");
+        modelo.addColumn("piso");
+        modelo.addColumn("estado");
+        modelo.addColumn("Id TipodeHabitacion");
+        JtHabitacionesDispo.setModel(modelo);
+    }
+
+    private void cargarTiposHabitacion() {
+        // Obtén la lista de tipos de habitación desde TipoDeHabitacionData
+        List<TipodeHabitacion> tiposHabitacion = tipoDeHabitacionData.listarTipodeHabitaciones();
+
+        // Crea un nuevo modelo de ComboBox para tipos de habitación
+        DefaultComboBoxModel<TipodeHabitacion> model = new DefaultComboBoxModel<>();
+
+        // Agrega cada tipo de habitación al modelo del ComboBox
+        tiposHabitacion.forEach((tipo) -> {
+            model.addElement(tipo);
+        });
+
+      
+        jcTipoHabitacion.setModel(model);
     }
 
 }

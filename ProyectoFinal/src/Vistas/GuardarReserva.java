@@ -13,7 +13,6 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +41,8 @@ public class GuardarReserva extends javax.swing.JPanel {
         armarCabecera();
         cargarTiposHabitacion();
         cargarHuespedes();
-
+        jtCodigoHabitacion.setEnabled(false);
+        JtMontoApagar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -302,6 +302,10 @@ public class GuardarReserva extends javax.swing.JPanel {
             // Crear una instancia de Reserva
             Reserva reserva = new Reserva();
 
+            //System.out.println(selectedHabitacion.getIdTDHabitacion() + " --- "+ selectedHabitacion.getIdTipoHabitacion()+" --- "+selectedHabitacion.getIdHabitacion());
+            //selectedHabitacion.setEstado(false);
+            //habitacionData.modificarHabitacion(selectedHabitacion);
+            
             reserva.setHuesped(selectedHuesped);
             reserva.setEstado(estado);
             reserva.setCantidadPerso(cantidadPersonas);
@@ -312,7 +316,6 @@ public class GuardarReserva extends javax.swing.JPanel {
             reserva.setMonto(monto);
 
             // Guardar la reserva en la base de datos
-            //ReservaData reservaData = new ReservaData();
             reservaData.guardarReserva(reserva);
             limpiarFormulario();
 
@@ -430,7 +433,7 @@ public class GuardarReserva extends javax.swing.JPanel {
                     habitacion.getIdHabitacion(),
                     habitacion.getNumero(),
                     habitacion.getPiso(),
-                    habitacion.isEstado(),
+                    habitacion.isEstado()? "LIBRE":"OCUPADA",
                     habitacion.getIdTDHabitacion().getIdTipoHabitacion()});
             }
         } catch (Exception ex) {

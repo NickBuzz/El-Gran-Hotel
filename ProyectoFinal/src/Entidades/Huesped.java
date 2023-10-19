@@ -90,10 +90,6 @@ public class Huesped {
 
     @Override
     public String toString() {
-        return "Huesped{" + "IdHuesped=" + IdHuesped + ", nombre=" + nombre + ", dni=" + dni + ", correo=" + correo + ", celular=" + celular + ", domicilio=" + domicilio + ", estado=" + estado + '}';
-    }
-
-    
-    
-    
+        return IdHuesped + "-" + nombre + ", DNI: " + dni;
+    }    
 }

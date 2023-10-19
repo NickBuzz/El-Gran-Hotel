@@ -1,8 +1,13 @@
 package Vistas;
 
+import AccesoADatos.HabitacionData;
+import AccesoADatos.TipodeHabitacionData;
+import Entidades.Habitacion;
+import Entidades.TipodeHabitacion;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.awt.BorderLayout;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -26,6 +31,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         showJPanel(Contenido, new Bienvenida());
         System.out.println("hola");
+        //cargaHabitacion(); //Carga 200 habitaciones de manera aleatoria dividas equitativamente en 20 pisos
     }
 
     
@@ -40,8 +46,6 @@ public class Menu extends javax.swing.JFrame {
         Habitaciones = new javax.swing.JToggleButton();
         Huesped = new javax.swing.JToggleButton();
         TipoHabitaciones = new javax.swing.JToggleButton();
-        jToggleButton12 = new javax.swing.JToggleButton();
-        jToggleButton14 = new javax.swing.JToggleButton();
         jSeparator4 = new javax.swing.JSeparator();
         Contenido = new javax.swing.JPanel();
         Cabecera = new javax.swing.JPanel();
@@ -96,14 +100,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jToggleButton12);
-        jToggleButton12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jToggleButton12.setText("...");
-
-        buttonGroup1.add(jToggleButton14);
-        jToggleButton14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jToggleButton14.setText("...");
-
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         javax.swing.GroupLayout BotonesLayout = new javax.swing.GroupLayout(Botones);
@@ -113,8 +109,6 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(BotonesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jToggleButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Reserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TipoHabitaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Habitaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,11 +130,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(TipoHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 344, Short.MAX_VALUE))
+                        .addGap(0, 456, Short.MAX_VALUE))
                     .addComponent(jSeparator4))
                 .addContainerGap())
         );
@@ -294,6 +284,25 @@ public class Menu extends javax.swing.JFrame {
         c.repaint();        
     }
     
+    private void cargaHabitacion(){
+        Random rand = new Random();
+        HabitacionData habitacionData = new HabitacionData();
+        int num;
+        int piso;
+        boolean act;
+        int idTDH;
+        Habitacion hab;
+        for (int i = 1; i <= 200; i++) {
+            num = i;
+            piso = (i - 1) / 10 + 1;
+            act = true;
+            idTDH = rand.nextInt(6)+4;
+            hab = new Habitacion(num, piso, act, idTDH);
+            habitacionData.guardarHabitacion(hab);
+        }
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -323,7 +332,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JToggleButton jToggleButton12;
-    private javax.swing.JToggleButton jToggleButton14;
     // End of variables declaration//GEN-END:variables
 }

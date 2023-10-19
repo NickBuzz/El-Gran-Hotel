@@ -30,6 +30,7 @@ public class Huespedes extends javax.swing.JPanel {
     }
 
     private void armarCabecera() {
+        modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("CORREO");
@@ -51,6 +52,7 @@ public class Huespedes extends javax.swing.JPanel {
         huespedList = HD.listarHuespedes();
         huespedList.forEach((Huesped) -> {
             modelo.addRow(new Object[]{
+                Huesped.getIdHuesped(),
                 Huesped.getDni(),
                 Huesped.getNombre(),
                 Huesped.getCorreo(),
@@ -63,6 +65,7 @@ public class Huespedes extends javax.swing.JPanel {
 
     private void llenarModelo(Huesped huesped) {
         modelo.addRow(new Object[]{
+            huesped.getIdHuesped(),
             huesped.getDni(),
             huesped.getNombre(),
             huesped.getCorreo(),
@@ -93,6 +96,7 @@ public class Huespedes extends javax.swing.JPanel {
         checkDni = new javax.swing.JRadioButton();
         checkNombre = new javax.swing.JRadioButton();
         jSeparator1 = new javax.swing.JSeparator();
+        checkId = new javax.swing.JRadioButton();
 
         TextBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -155,6 +159,9 @@ public class Huespedes extends javax.swing.JPanel {
         buttonGroup1.add(checkNombre);
         checkNombre.setText("NOMBRE");
 
+        buttonGroup1.add(checkId);
+        checkId.setText("ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,8 +186,10 @@ public class Huespedes extends javax.swing.JPanel {
                                 .addComponent(BActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkId)
+                                .addGap(18, 18, 18)
                                 .addComponent(checkDni)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(checkNombre)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator1))))
@@ -196,7 +205,8 @@ public class Huespedes extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkDni)
-                    .addComponent(checkNombre))
+                    .addComponent(checkNombre)
+                    .addComponent(checkId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,6 +225,12 @@ public class Huespedes extends javax.swing.JPanel {
     private void TextBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextBuscarKeyReleased
         borrarFilas();
         huespedList.forEach((Huesped) -> {
+            if (checkId.isSelected()){
+                String id = String.valueOf(Huesped.getIdHuesped());
+                if (id.startsWith(TextBuscar.getText())){
+                    llenarModelo(Huesped);
+                }
+            }
             if (checkDni.isSelected()) {
                 String dni = String.valueOf(Huesped.getDni());
                 if (dni.startsWith(TextBuscar.getText())) {
@@ -270,7 +286,7 @@ public class Huespedes extends javax.swing.JPanel {
 
     private void TextBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextBuscarKeyTyped
         char c = evt.getKeyChar();
-        if (checkDni.isSelected()) {
+        if (checkDni.isSelected() || checkId.isSelected()) {
             if (!Character.isDigit(c) || TextBuscar.getText().length() >= 8) {
                 evt.consume();
             }
@@ -293,6 +309,7 @@ public class Huespedes extends javax.swing.JPanel {
     private javax.swing.JTextField TextBuscar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton checkDni;
+    private javax.swing.JRadioButton checkId;
     private javax.swing.JRadioButton checkNombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

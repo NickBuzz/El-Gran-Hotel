@@ -15,24 +15,29 @@ public class Habitacion {
     private int numero;
     private int piso;
     private boolean estado;
-    private int IdTDHabitacion;
+    private TipodeHabitacion IdTDHabitacion;
+    private int idTipoHabitacion;
     
     public Habitacion (){}
 
-    public Habitacion(int IdHabitacion, int numero, int piso, boolean estado, TipodeHabitacion idhabitacion) {
+    public Habitacion(int IdHabitacion, int numero, int piso, boolean estado, int idTipoHabitacion) {
         this.IdHabitacion = IdHabitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
-        this.IdTDHabitacion= idhabitacion.getIdTipoHabitacion();
+        this.idTipoHabitacion= idTipoHabitacion;
     }
     
-     public Habitacion( int numero, int piso, boolean estado) {
-
+     public Habitacion( int numero, int piso, boolean estado, int idTipoHabitacion ) {
+         this.IdHabitacion = IdHabitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
+         this.idTipoHabitacion= idTipoHabitacion;
+           
     }
+     
+    
 
     public int getIdHabitacion() {
         return IdHabitacion;
@@ -48,6 +53,14 @@ public class Habitacion {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public int getIdTipoHabitacion() {
+        return idTipoHabitacion;
+    }
+
+    public void setIdTipoHabitacion(int idTipoHabitacion) {
+        this.idTipoHabitacion = idTipoHabitacion;
     }
 
     public int getPiso() {
@@ -66,13 +79,15 @@ public class Habitacion {
         this.estado = estado;
     }
 
-    public int getIdTDHabitacion() {
+    public TipodeHabitacion getIdTDHabitacion() {
         return IdTDHabitacion;
     }
 
-    public void setIdTDHabitacion(int IdTDHabitacion) {
+    public void setIdTDHabitacion(TipodeHabitacion IdTDHabitacion) {
         this.IdTDHabitacion = IdTDHabitacion;
     }
+
+  
 
 
 

@@ -51,7 +51,7 @@ public class TipodeHabitacionData {
     //buscar tipo de habitacion por id
     public TipodeHabitacion buscarTipoHabitacion(int id) {
         TipodeHabitacion tipohabitacion = null;
-        String sql = "SELECT Capacidad, CantCamas, TipoCamas, PrecioNoche, Codigo FROM tipohabitacion WHERE IdTipoHabitacion = ?";
+        String sql = "SELECT Capacidad, CantCamas, TipoCamas, PrecioNoche, Codigo FROM tipohabitacion WHERE IdTipoHabitacion = ? ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -203,3 +203,4 @@ public class TipodeHabitacionData {
         return tipodehabitacion;
     }
 }
+

@@ -83,12 +83,15 @@ public class GuardarReserva extends javax.swing.JPanel {
         jLabel1.setText("Nueva Reserva");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Door Hanger.png"))); // NOI18N
         jLabel4.setText("Codigo De Huesped");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Calendar.png"))); // NOI18N
         jLabel5.setText("Fecha De Entrada");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Calendar.png"))); // NOI18N
         jLabel6.setText("Fecha De Salida");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -101,6 +104,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Name.png"))); // NOI18N
         jLabel8.setText("Cantidad De Personas");
 
         JtHabitacionesDispo.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,6 +126,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         jScrollPane1.setViewportView(JtHabitacionesDispo);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Cash.png"))); // NOI18N
         jLabel9.setText("Monto A Pagar");
 
         jbguardar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -146,6 +151,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         Jchekestado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Door Hanger.png"))); // NOI18N
         jLabel11.setText("Codigo De Habitacion");
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +161,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Account.png"))); // NOI18N
         jLabel3.setText("Selecione Un Huesped");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -414,12 +421,7 @@ public class GuardarReserva extends javax.swing.JPanel {
             int index = jcTipoHabitacion.getSelectedIndex();
             TipodeHabitacion tipoHabitacion = jcTipoHabitacion.getItemAt(index);
             System.out.println(index);
-            // Obtener la fecha de entrada y fecha de salida
-            //LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            //LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            // Obtener las habitaciones disponibles para el tipo de habitación y fechas seleccionadas
-            //HabitacionData habitacionData = new HabitacionData();
+            
             List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion(), true);
             System.out.println(tipoHabitacion.getIdTipoHabitacion());
             // Mostrar las habitaciones disponibles en la tabla

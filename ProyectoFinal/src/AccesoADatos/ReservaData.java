@@ -129,7 +129,7 @@ public class ReservaData {
             ps.setDouble(4, reserva.getMonto());
             ps.setBoolean(5, reserva.isEstado());
             ps.setInt(6, reserva.getHuesped().getIdHuesped());
-            ps.setInt(6, reserva.getHabitacion().getIdHabitacion());
+            ps.setInt(7, reserva.getHabitacion().getIdHabitacion());
             ps.setInt(8, reserva.getIdReserva());
 
             ps.executeUpdate();

@@ -301,9 +301,7 @@ public class GuardarReserva extends javax.swing.JPanel {
 
             // Crear una instancia de Reserva
             Reserva reserva = new Reserva();
-            
-            
-            
+
             reserva.setHuesped(selectedHuesped);
             reserva.setEstado(estado);
             reserva.setCantidadPerso(cantidadPersonas);
@@ -316,7 +314,7 @@ public class GuardarReserva extends javax.swing.JPanel {
             // Guardar la reserva en la base de datos
             //ReservaData reservaData = new ReservaData();
             reservaData.guardarReserva(reserva);
-
+            limpiarFormulario();
 
             JOptionPane.showMessageDialog(this, "Reserva guardada con éxito");
         } catch (NumberFormatException ex) {
@@ -334,33 +332,33 @@ public class GuardarReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_jblimpiarActionPerformed
 
     private void jcTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoHabitacionActionPerformed
-        
+
         cargarHabitacionesDisponibles();
     }//GEN-LAST:event_jcTipoHabitacionActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         selectedHuesped = (Huesped) jComboBox1.getSelectedItem();
         if (selectedHuesped != null) {
-           
+
             jtIdHuesped.setText(String.valueOf(selectedHuesped.getIdHuesped()));
         }
-    
+
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void JtHabitacionesDispoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtHabitacionesDispoMouseClicked
         int filaSeleccionada = JtHabitacionesDispo.getSelectedRow();
-        if (filaSeleccionada != -1){
+        if (filaSeleccionada != -1) {
             Object valorId = JtHabitacionesDispo.getValueAt(filaSeleccionada, 0);
             Object valorMonto = JtHabitacionesDispo.getValueAt(filaSeleccionada, 4);
             jtCodigoHabitacion.setText(String.valueOf(valorId));
-            selectedHabitacion = habitacionData.buscarHabitacion((int)valorId);
-            if (jdFentrada != null && jdfeSalida != null){
+            selectedHabitacion = habitacionData.buscarHabitacion((int) valorId);
+            if (jdFentrada != null && jdfeSalida != null) {
                 // Calcular el monto total de la reserva
                 LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 long numNoches = ChronoUnit.DAYS.between(fechaEntrada, fechaSalida);
-                TipodeHabitacion tp = tipoDeHabitacionData.buscarTipoHabitacion((int)valorMonto);
+                TipodeHabitacion tp = tipoDeHabitacionData.buscarTipoHabitacion((int) valorMonto);
                 double monto = numNoches * tp.getPrecioNoche();
                 JtMontoApagar.setText(String.valueOf(monto));
             }
@@ -422,7 +420,7 @@ public class GuardarReserva extends javax.swing.JPanel {
 
             // Obtener las habitaciones disponibles para el tipo de habitación y fechas seleccionadas
             //HabitacionData habitacionData = new HabitacionData();
-            List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion(),true);
+            List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion(), true);
             System.out.println(tipoHabitacion.getIdTipoHabitacion());
             // Mostrar las habitaciones disponibles en la tabla
             DefaultTableModel model = (DefaultTableModel) JtHabitacionesDispo.getModel();
@@ -450,7 +448,7 @@ public class GuardarReserva extends javax.swing.JPanel {
     }
 
     private void cargarTiposHabitacion() {
-        
+
         List<TipodeHabitacion> tiposHabitacion = tipoDeHabitacionData.listarTipodeHabitaciones();
 
         // Crea un nuevo modelo de ComboBox para tipos de habitación
@@ -461,23 +459,20 @@ public class GuardarReserva extends javax.swing.JPanel {
             model.addElement(tipo);
         });
 
-      
         jcTipoHabitacion.setModel(model);
     }
+
     private void cargarHuespedes() {
 // lista de huéspedes desde HuespedData
-    List<Huesped> huespedes = huespedData.listarHuespedes();
+        List<Huesped> huespedes = huespedData.listarHuespedes();
 
-   
-    DefaultComboBoxModel<Huesped> model = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Huesped> model = new DefaultComboBoxModel<>();
 
-    
-    huespedes.forEach((huesped) -> {
-        model.addElement(huesped);
-    });
+        huespedes.forEach((huesped) -> {
+            model.addElement(huesped);
+        });
 
-    jComboBox1.setModel(model);
-}
-
+        jComboBox1.setModel(model);
+    }
 
 }

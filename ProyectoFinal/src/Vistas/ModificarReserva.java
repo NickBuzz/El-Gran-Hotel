@@ -314,8 +314,8 @@ public class ModificarReserva extends javax.swing.JPanel {
             TipodeHabitacion selectedTipoHabitacion = (TipodeHabitacion) jcTipoHabitacion.getSelectedItem();
             double monto = Double.parseDouble(JtMontoApagar.getText());
             
-            //reservaActual.getHabitacion().setEstado(true);                      // En el caso que al modificar la reserva se cambie de habitacion
-            //habitacionData.modificarHabitacion(reservaActual.getHabitacion());  // se setea la habitacion que deja como libre(true) en la base.
+            reservaActual.getHabitacion().setEstado(true);                      // En el caso que al modificar la reserva se cambie de habitacion
+            habitacionData.modificarHabitacion(reservaActual.getHabitacion());  // se setea la habitacion que deja como libre(true) en la base.
             
             reservaActual.setFechaEntrada(fechaEntrada);
             reservaActual.setFechaSalida(fechaSalida);
@@ -331,8 +331,8 @@ public class ModificarReserva extends javax.swing.JPanel {
 
             reservadata.actualizarReserva(reservaActual);
             
-            //selectedHabitacion.setEstado(false);                        // Setea la habitacion como ocupada(false)
-            //habitacionData.modificarHabitacion(selectedHabitacion);     // y se actualiza la base de datos.
+            selectedHabitacion.setEstado(false);                        // Setea la habitacion como ocupada(false)
+            habitacionData.modificarHabitacion(selectedHabitacion);     // y se actualiza la base de datos.
             
             limpiarFormulario();
             JOptionPane.showMessageDialog(this, "Reserva actualizada exitosamente.");

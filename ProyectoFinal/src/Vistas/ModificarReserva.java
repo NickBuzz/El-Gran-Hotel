@@ -40,6 +40,9 @@ public class ModificarReserva extends javax.swing.JPanel {
         cargarHabitacionesDisponiblesModificar();
         jtCodigoHabitacion.setEnabled(false);
         JtMontoApagar.setEnabled(false);
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
+        JtHabitacionesDispo.setRowSorter(sorter);
     }
 
     @SuppressWarnings("unchecked")
@@ -78,6 +81,9 @@ public class ModificarReserva extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Codigo De Huesped");
+
+        jtIdHuesped.setEditable(false);
+        jtIdHuesped.setFocusable(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Fecha De Entrada");
@@ -427,7 +433,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }
 
     private void mostrarHabitacionesDisponibles(TipodeHabitacion tipoHabitacion) {
-        List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion(), true);
+        List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion());
         DefaultTableModel model = (DefaultTableModel) JtHabitacionesDispo.getModel();
         model.setRowCount(0); // Limpia la tabla
         for (Habitacion habitacion : habitacionesDisponibles) {

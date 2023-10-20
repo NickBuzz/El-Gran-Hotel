@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ModificarReserva extends javax.swing.JPanel {
 
@@ -37,7 +38,8 @@ public class ModificarReserva extends javax.swing.JPanel {
         initComponents();
         inicializarDatos();
         cargarHabitacionesDisponiblesModificar();
-
+        jtCodigoHabitacion.setEnabled(false);
+        JtMontoApagar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -246,9 +248,9 @@ public class ModificarReserva extends javax.swing.JPanel {
                     .addComponent(jdFentrada, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdfeSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -263,9 +265,9 @@ public class ModificarReserva extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jblimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(115, 115, 115)
+                .addGap(20, 20, 20)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -308,16 +310,30 @@ public class ModificarReserva extends javax.swing.JPanel {
             int codigoHabitacion = Integer.parseInt(jtCodigoHabitacion.getText());
             boolean estado = Jchekestado.isSelected();
             Huesped selectedHuesped = (Huesped) jComboBox1.getSelectedItem();
+            Habitacion selectedHabitacion = habitacionData.buscarHabitacion(codigoHabitacion);
             TipodeHabitacion selectedTipoHabitacion = (TipodeHabitacion) jcTipoHabitacion.getSelectedItem();
-
+            double monto = Double.parseDouble(JtMontoApagar.getText());
+            
+            //reservaActual.getHabitacion().setEstado(true);                      // En el caso que al modificar la reserva se cambie de habitacion
+            //habitacionData.modificarHabitacion(reservaActual.getHabitacion());  // se setea la habitacion que deja como libre(true) en la base.
+            
             reservaActual.setFechaEntrada(fechaEntrada);
             reservaActual.setFechaSalida(fechaSalida);
             reservaActual.setCantidadPerso(cantidadPersonas);
-            reservaActual.setHabitacion(habitacionData.buscarHabitacion(codigoHabitacion));
+            reservaActual.setHabitacion(selectedHabitacion);
             reservaActual.setEstado(estado);
             reservaActual.setHuesped(selectedHuesped);
             reservaActual.setTipoHabitacion(selectedTipoHabitacion);
+
+
+            reservaActual.setMonto(monto);
+
+
             reservadata.actualizarReserva(reservaActual);
+            
+            //selectedHabitacion.setEstado(false);                        // Setea la habitacion como ocupada(false)
+            //habitacionData.modificarHabitacion(selectedHabitacion);     // y se actualiza la base de datos.
+            
             limpiarFormulario();
             JOptionPane.showMessageDialog(this, "Reserva actualizada exitosamente.");
         } catch (NumberFormatException ex) {
@@ -430,7 +446,7 @@ public class ModificarReserva extends javax.swing.JPanel {
                 habitacion.getIdHabitacion(),
                 habitacion.getNumero(),
                 habitacion.getPiso(),
-                habitacion.isEstado(),
+                habitacion.isEstado()? "LIBRE":"OCUPADA",
                 habitacion.getIdTDHabitacion().getIdTipoHabitacion()
             });
 

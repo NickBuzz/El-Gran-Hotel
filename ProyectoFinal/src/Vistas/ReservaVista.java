@@ -1,5 +1,6 @@
 package Vistas;
 
+import AccesoADatos.HabitacionData;
 import AccesoADatos.ReservaData;
 import Entidades.Reserva;
 import java.util.ArrayList;
@@ -16,10 +17,12 @@ public class ReservaVista extends javax.swing.JPanel {
         }
     };
     private final ReservaData RD;
+    private final HabitacionData HD;
     private List<Reserva> reservaList = new ArrayList<>();
 
     public ReservaVista() {
         this.RD = new ReservaData();
+        this.HD = new HabitacionData();
         reservaList = RD.obtenerReservas();
         initComponents();
         armarCabecera();
@@ -73,7 +76,7 @@ public class ReservaVista extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Bienvenido al Sistema de Reservas");
+        jLabel2.setText("SISTEMA DE RESERVAS");
 
         jbActualizarTabla.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jbActualizarTabla.setText("Actualizar Tabla");
@@ -196,6 +199,10 @@ public class ReservaVista extends javax.swing.JPanel {
             Object valor = jtReservas.getValueAt(seleccion, 0);
             int idReserva = (int) valor;
             Reserva parametro = RD.buscarReservaPorId(idReserva);
+            
+            //parametro.getHabitacion().setEstado(false);         // Si se elimina una reserva logicamente,
+            //HD.modificarHabitacion(parametro.getHabitacion());  // tambien se actualiza el estado de la habitacion.
+            
             RD.eliminarReserva(parametro.getIdReserva());
             updateTabla();
 
@@ -223,14 +230,13 @@ public class ReservaVista extends javax.swing.JPanel {
             if (nombreHuesped.contains(textoBusqueda) || String.valueOf(idReserva).contains(textoBusqueda)) {
                 modelo.addRow(new Object[]{
                     reserva.getIdReserva(),
+                    reserva.getHuesped().getIdHuesped() + " - " + reserva.getHuesped().getNombre(),
                     reserva.getFechaEntrada(),
                     reserva.getFechaSalida(),
                     reserva.getCantidadPerso(),
-                    reserva.getMonto(),
-                    reserva.isEstado() ? "Activa" : "Inactiva",
-                    reserva.getHuesped().getIdHuesped(),
-                    reserva.getHabitacion().getIdHabitacion()
-
+                    reserva.getMonto(),                    
+                    reserva.getHabitacion().getIdHabitacion(),
+                    reserva.isEstado() ? "Activa" : "Inactiva"
                 });
             }
         });
@@ -255,13 +261,15 @@ public class ReservaVista extends javax.swing.JPanel {
 
     private void armarCabecera() {
         modelo.addColumn("IdReserva");
+        modelo.addColumn("IdHusped");
         modelo.addColumn("Fecha Entrada");
         modelo.addColumn("Fecha Salida");
         modelo.addColumn("Cantidad De Personas");
-        modelo.addColumn("Monto");
-        modelo.addColumn("estado");
-        modelo.addColumn("IdHusped");
+
+        modelo.addColumn("Monto");        
+
         modelo.addColumn("Id Habitacion");
+        modelo.addColumn("Estado");
         jtReservas.setModel(modelo);
 //armado de tabla 
     }
@@ -279,16 +287,18 @@ public class ReservaVista extends javax.swing.JPanel {
         reservaList.forEach((reserva) -> {
             modelo.addRow(new Object[]{
                 reserva.getIdReserva(),
+                reserva.getHuesped().getIdHuesped() + " - " + reserva.getHuesped().getNombre(),
                 reserva.getFechaEntrada(),
                 reserva.getFechaSalida(),
                 reserva.getCantidadPerso(),
                 reserva.getMonto(),
-                reserva.isEstado() ? "Activa" : "Inactiva",
-                reserva.getHuesped().getIdHuesped(),
-                reserva.getHabitacion().getIdHabitacion()
-            //refresca la tabla de reservas en la interfaz con los datos mas recientes
+
+
+                reserva.getHabitacion().getIdHabitacion(),
+                reserva.isEstado() ? "Activa" : "Inactiva"
+                //refresca la tabla de reservas en la interfaz con los datos mas recientes
+
             });
         });
     }
-
 }

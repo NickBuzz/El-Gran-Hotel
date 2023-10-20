@@ -302,9 +302,8 @@ public class GuardarReserva extends javax.swing.JPanel {
             // Crear una instancia de Reserva
             Reserva reserva = new Reserva();
 
-            //System.out.println(selectedHabitacion.getIdTDHabitacion() + " --- "+ selectedHabitacion.getIdTipoHabitacion()+" --- "+selectedHabitacion.getIdHabitacion());
-            //selectedHabitacion.setEstado(false);
-            //habitacionData.modificarHabitacion(selectedHabitacion);
+            selectedHabitacion.setEstado(false);
+            habitacionData.modificarHabitacion(selectedHabitacion);
             
             reserva.setHuesped(selectedHuesped);
             reserva.setEstado(estado);

@@ -265,8 +265,11 @@ public class ReservaVista extends javax.swing.JPanel {
         modelo.addColumn("Fecha Entrada");
         modelo.addColumn("Fecha Salida");
         modelo.addColumn("Cantidad De Personas");
+
         modelo.addColumn("Monto");        
+
         modelo.addColumn("Habitacion");
+
         modelo.addColumn("Estado");
         jtReservas.setModel(modelo);
 //armado de tabla 
@@ -290,9 +293,12 @@ public class ReservaVista extends javax.swing.JPanel {
                 reserva.getFechaSalida(),
                 reserva.getCantidadPerso(),
                 reserva.getMonto(),
+
                 reserva.getHabitacion().getNumero(),
+
                 reserva.isEstado() ? "Activa" : "Inactiva"
                 //refresca la tabla de reservas en la interfaz con los datos mas recientes
+
             });
         });
     }

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class GuardarReserva extends javax.swing.JPanel {
 
@@ -43,6 +44,9 @@ public class GuardarReserva extends javax.swing.JPanel {
         cargarHuespedes();
         jtCodigoHabitacion.setEnabled(false);
         JtMontoApagar.setEnabled(false);
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
+        JtHabitacionesDispo.setRowSorter(sorter);
     }
 
     @SuppressWarnings("unchecked")
@@ -85,6 +89,9 @@ public class GuardarReserva extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Door Hanger.png"))); // NOI18N
         jLabel4.setText("Codigo De Huesped");
+
+        jtIdHuesped.setEditable(false);
+        jtIdHuesped.setFocusable(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Calendar.png"))); // NOI18N
@@ -423,8 +430,15 @@ public class GuardarReserva extends javax.swing.JPanel {
             int index = jcTipoHabitacion.getSelectedIndex();
             TipodeHabitacion tipoHabitacion = jcTipoHabitacion.getItemAt(index);
             System.out.println(index);
-            
-            List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion(), true);
+
+            // Obtener la fecha de entrada y fecha de salida
+            //LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            //LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            // Obtener las habitaciones disponibles para el tipo de habitación y fechas seleccionadas
+            //HabitacionData habitacionData = new HabitacionData();
+            List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion());
+
             System.out.println(tipoHabitacion.getIdTipoHabitacion());
             // Mostrar las habitaciones disponibles en la tabla
             DefaultTableModel model = (DefaultTableModel) JtHabitacionesDispo.getModel();

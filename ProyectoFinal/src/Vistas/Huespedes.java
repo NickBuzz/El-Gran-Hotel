@@ -273,7 +273,7 @@ public class Huespedes extends javax.swing.JPanel {
     private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
         int seleccion = jtHuespedes.getSelectedRow();
         if (seleccion != -1) {
-            Object valor = jtHuespedes.getValueAt(seleccion, 0);
+            Object valor = jtHuespedes.getValueAt(seleccion, 1);
             int dni = (int) valor;
             Huesped parametro = HD.buscarHuespedPorDni(dni);
             HD.eliminarHuesped(parametro.getIdHuesped());

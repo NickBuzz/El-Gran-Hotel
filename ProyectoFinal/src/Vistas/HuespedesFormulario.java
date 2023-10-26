@@ -100,6 +100,7 @@ public class HuespedesFormulario extends javax.swing.JPanel {
             }
         });
 
+        cboxEstado.setText("INACTIVO");
         cboxEstado.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 cboxEstadoStateChanged(evt);

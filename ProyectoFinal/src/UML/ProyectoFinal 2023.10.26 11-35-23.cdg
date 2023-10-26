@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ProyectoFinal">
+  <ClassDiagramComponents>
+    <Class name="Conexion" package="AccesoADatos" visibility="public" xPosition="134.0" yPosition="7.0">
+      <Fields>
+        <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="USUARIO" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="PASSWORD" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="connection" type="Connection" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="getConexion" returnType="Connection" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="HabitacionData" package="AccesoADatos" visibility="public" xPosition="1053.0" yPosition="42.0">
+      <Fields>
+        <Field name="tipoDeHabitacionData" type="TipodeHabitacionData" visibility="package"/>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarHabitacion" returnType="void" visibility="public">
+          <Argument type="Habitacion" name="habitacion"/>
+        </Method>
+        <Method name="modificarHabitacion" returnType="void" visibility="public">
+          <Argument type="Habitacion" name="habitacion"/>
+        </Method>
+        <Method name="eliminarHabitacion" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarHabitacion" returnType="Habitacion" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarHabitacionPorNumero" returnType="Habitacion" visibility="public">
+          <Argument type="int" name="numero"/>
+        </Method>
+        <Method name="listarHabitaciones" returnType="List&lt;Habitacion&gt;" visibility="public"/>
+        <Method name="obtenerTipoHabitacion" returnType="List&lt;Habitacion&gt;" visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+        </Method>
+        <Method name="obtenerHabitacionesDisponibles" returnType="List&lt;Habitacion&gt;" visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+          <Argument type="LocalDate" name="fechaEntrada"/>
+          <Argument type="LocalDate" name="fechaSalida"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="HuespedData" package="AccesoADatos" visibility="public" xPosition="1489.0" yPosition="42.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarHuesped" returnType="void" visibility="public">
+          <Argument type="Huesped" name="huesped"/>
+        </Method>
+        <Method name="modificarHuesped" returnType="void" visibility="public">
+          <Argument type="Huesped" name="huesped"/>
+        </Method>
+        <Method name="eliminarHuesped" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarHuesped" returnType="Huesped" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="buscarHuespedPorDni" returnType="Huesped" visibility="public">
+          <Argument type="int" name="dni"/>
+        </Method>
+        <Method name="listarHuespedes" returnType="List&lt;Huesped&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ReservaData" package="AccesoADatos" visibility="public" xPosition="7.0" yPosition="227.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+        <Field name="huespedData" type="HuespedData" visibility="private"/>
+        <Field name="habiData" type="HabitacionData" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="guardarReserva" returnType="void" visibility="public">
+          <Argument type="Reserva" name="reserva"/>
+        </Method>
+        <Method name="obtenerReservas" returnType="List&lt;Reserva&gt;" visibility="public"/>
+        <Method name="obtenerReservaPorHuesped" returnType="List&lt;Reserva&gt;" visibility="public">
+          <Argument type="int" name="IdHuesped"/>
+        </Method>
+        <Method name="actualizarReserva" returnType="void" visibility="public">
+          <Argument type="Reserva" name="reserva"/>
+        </Method>
+        <Method name="eliminarReserva" returnType="void" visibility="public">
+          <Argument type="int" name="IdReserva"/>
+        </Method>
+        <Method name="buscarReservaPorId" returnType="Reserva" visibility="public">
+          <Argument type="int" name="IdReserva"/>
+        </Method>
+        <Method name="obtenerReservasActivas" returnType="List&lt;Reserva&gt;" visibility="public"/>
+        <Method name="obtenerReservasPorFechas" returnType="List&lt;Reserva&gt;" visibility="public">
+          <Argument type="Date" name="fechaInicio"/>
+          <Argument type="Date" name="fechaFin"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="TipodeHabitacionData" package="AccesoADatos" visibility="public" xPosition="495.0" yPosition="42.0">
+      <Fields>
+        <Field name="con" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="cambiarPrecio" returnType="void" visibility="public">
+          <Argument type="TipodeHabitacion" name="tipohabitacion"/>
+        </Method>
+        <Method name="buscarTipoHabitacion" returnType="TipodeHabitacion" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="guardarTipoHabitacion" returnType="void" visibility="public">
+          <Argument type="TipodeHabitacion" name="tipohabitacion"/>
+        </Method>
+        <Method name="eliminarTipodeHabitacion" returnType="void" visibility="public">
+          <Argument type="int" name="id"/>
+        </Method>
+        <Method name="listarTipodeHabitaciones" returnType="List&lt;TipodeHabitacion&gt;" visibility="public"/>
+        <Method name="buscarTipoHabitacionPorNombre" returnType="TipodeHabitacion" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="obtenerTipoDeHabitacionPorNombre" returnType="TipodeHabitacion" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Habitacion" package="Entidades" visibility="public" xPosition="1053.0" yPosition="390.0">
+      <Fields>
+        <Field name="IdHabitacion" type="int" visibility="private"/>
+        <Field name="numero" type="int" visibility="private"/>
+        <Field name="piso" type="int" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+        <Field name="IdTDHabitacion" type="TipodeHabitacion" visibility="private"/>
+        <Field name="idTipoHabitacion" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="IdHabitacion"/>
+          <Argument type="int" name="numero"/>
+          <Argument type="int" name="piso"/>
+          <Argument type="boolean" name="estado"/>
+          <Argument type="int" name="idTipoHabitacion"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="numero"/>
+          <Argument type="int" name="piso"/>
+          <Argument type="boolean" name="estado"/>
+          <Argument type="int" name="idTipoHabitacion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdHabitacion" returnType="int" visibility="public"/>
+        <Method name="setIdHabitacion" returnType="void" visibility="public">
+          <Argument type="int" name="IdHabitacion"/>
+        </Method>
+        <Method name="getNumero" returnType="int" visibility="public"/>
+        <Method name="setNumero" returnType="void" visibility="public">
+          <Argument type="int" name="numero"/>
+        </Method>
+        <Method name="getIdTipoHabitacion" returnType="int" visibility="public"/>
+        <Method name="setIdTipoHabitacion" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+        </Method>
+        <Method name="getPiso" returnType="int" visibility="public"/>
+        <Method name="setPiso" returnType="void" visibility="public">
+          <Argument type="int" name="piso"/>
+        </Method>
+        <Method name="isEstado" returnType="boolean" visibility="public"/>
+        <Method name="setEstado" returnType="void" visibility="public">
+          <Argument type="boolean" name="estado"/>
+        </Method>
+        <Method name="getIdTDHabitacion" returnType="TipodeHabitacion" visibility="public"/>
+        <Method name="setIdTDHabitacion" returnType="void" visibility="public">
+          <Argument type="TipodeHabitacion" name="IdTDHabitacion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Huesped" package="Entidades" visibility="public" xPosition="1141.0" yPosition="501.0">
+      <Fields>
+        <Field name="IdHuesped" type="int" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="dni" type="int" visibility="private"/>
+        <Field name="correo" type="String" visibility="private"/>
+        <Field name="celular" type="long" visibility="private"/>
+        <Field name="domicilio" type="String" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="IdHuesped"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="dni"/>
+          <Argument type="String" name="correo"/>
+          <Argument type="long" name="celular"/>
+          <Argument type="String" name="domicilio"/>
+          <Argument type="boolean" name="estado"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="dni"/>
+          <Argument type="String" name="correo"/>
+          <Argument type="long" name="celular"/>
+          <Argument type="String" name="domicilio"/>
+          <Argument type="boolean" name="estado"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdHuesped" returnType="int" visibility="public"/>
+        <Method name="setIdHuesped" returnType="void" visibility="public">
+          <Argument type="int" name="IdHuesped"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getDni" returnType="int" visibility="public"/>
+        <Method name="setDni" returnType="void" visibility="public">
+          <Argument type="int" name="dni"/>
+        </Method>
+        <Method name="getCorreo" returnType="String" visibility="public"/>
+        <Method name="setCorreo" returnType="void" visibility="public">
+          <Argument type="String" name="correo"/>
+        </Method>
+        <Method name="getCelular" returnType="long" visibility="public"/>
+        <Method name="setCelular" returnType="void" visibility="public">
+          <Argument type="long" name="celular"/>
+        </Method>
+        <Method name="getDomicilio" returnType="String" visibility="public"/>
+        <Method name="setDomicilio" returnType="void" visibility="public">
+          <Argument type="String" name="domicilio"/>
+        </Method>
+        <Method name="isEstado" returnType="boolean" visibility="public"/>
+        <Method name="setEstado" returnType="void" visibility="public">
+          <Argument type="boolean" name="estado"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Reserva" package="Entidades" visibility="public" xPosition="7.0" yPosition="561.0">
+      <Fields>
+        <Field name="IdReserva" type="int" visibility="private"/>
+        <Field name="FechaEntrada" type="LocalDate" visibility="private"/>
+        <Field name="FechaSalida" type="LocalDate" visibility="private"/>
+        <Field name="CantidadPerso" type="int" visibility="private"/>
+        <Field name="Monto" type="double" visibility="private"/>
+        <Field name="estado" type="boolean" visibility="private"/>
+        <Field name="huesped" type="Huesped" visibility="private"/>
+        <Field name="habitacion" type="Habitacion" visibility="private"/>
+        <Field name="tipoHabitacion" type="TipodeHabitacion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="LocalDate" name="FechaEntrada"/>
+          <Argument type="LocalDate" name="FechaSalida"/>
+          <Argument type="int" name="CantidadPerso"/>
+          <Argument type="double" name="Monto"/>
+          <Argument type="boolean" name="estado"/>
+          <Argument type="Huesped" name="huesped"/>
+          <Argument type="Habitacion" name="habitacion"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="IdReserva"/>
+          <Argument type="LocalDate" name="FechaEntrada"/>
+          <Argument type="LocalDate" name="FechaSalida"/>
+          <Argument type="int" name="CantidadPerso"/>
+          <Argument type="double" name="Monto"/>
+          <Argument type="boolean" name="estado"/>
+          <Argument type="Huesped" name="huesped"/>
+          <Argument type="Habitacion" name="habitacion"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdReserva" returnType="int" visibility="public"/>
+        <Method name="setIdReserva" returnType="void" visibility="public">
+          <Argument type="int" name="IdReserva"/>
+        </Method>
+        <Method name="getFechaEntrada" returnType="LocalDate" visibility="public"/>
+        <Method name="setFechaEntrada" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="FechaEntrada"/>
+        </Method>
+        <Method name="getFechaSalida" returnType="LocalDate" visibility="public"/>
+        <Method name="setTipoHabitacion" returnType="void" visibility="public">
+          <Argument type="TipodeHabitacion" name="tipoHabitacion"/>
+        </Method>
+        <Method name="setFechaSalida" returnType="void" visibility="public">
+          <Argument type="LocalDate" name="FechaSalida"/>
+        </Method>
+        <Method name="getCantidadPerso" returnType="int" visibility="public"/>
+        <Method name="setCantidadPerso" returnType="void" visibility="public">
+          <Argument type="int" name="CantidadPerso"/>
+        </Method>
+        <Method name="getMonto" returnType="double" visibility="public"/>
+        <Method name="setMonto" returnType="void" visibility="public">
+          <Argument type="double" name="Monto"/>
+        </Method>
+        <Method name="isEstado" returnType="boolean" visibility="public"/>
+        <Method name="setEstado" returnType="void" visibility="public">
+          <Argument type="boolean" name="estado"/>
+        </Method>
+        <Method name="getHuesped" returnType="Huesped" visibility="public"/>
+        <Method name="setHuesped" returnType="void" visibility="public">
+          <Argument type="Huesped" name="huesped"/>
+        </Method>
+        <Method name="getHabitacion" returnType="Habitacion" visibility="public"/>
+        <Method name="setHabitacion" returnType="void" visibility="public">
+          <Argument type="Habitacion" name="habitacion"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TipodeHabitacion" package="Entidades" visibility="public" xPosition="495.0" yPosition="789.0">
+      <Fields>
+        <Field name="idTipoHabitacion" type="int" visibility="private"/>
+        <Field name="capacidad" type="int" visibility="private"/>
+        <Field name="intcantCamas" type="int" visibility="private"/>
+        <Field name="tipoCamas" type="String" visibility="private"/>
+        <Field name="precioNoche" type="double" visibility="private"/>
+        <Field name="codigo" type="String" visibility="private"/>
+        <Field name="nombre" type="NombreHabitacion" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="capacidad"/>
+          <Argument type="int" name="intcantCamas"/>
+          <Argument type="String" name="tipoCamas"/>
+          <Argument type="double" name="precioNoche"/>
+          <Argument type="NombreHabitacion" name="nombre"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+          <Argument type="int" name="capacidad"/>
+          <Argument type="int" name="intcantCamas"/>
+          <Argument type="String" name="tipoCamas"/>
+          <Argument type="double" name="precioNoche"/>
+          <Argument type="String" name="codigo"/>
+          <Argument type="NombreHabitacion" name="nombre"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+          <Argument type="int" name="capacidad"/>
+          <Argument type="int" name="intcantCamas"/>
+          <Argument type="String" name="tipoCamas"/>
+          <Argument type="double" name="precioNoche"/>
+          <Argument type="String" name="codigo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdTipoHabitacion" returnType="int" visibility="public"/>
+        <Method name="setIdTipoHabitacion" returnType="void" visibility="public">
+          <Argument type="int" name="idTipoHabitacion"/>
+        </Method>
+        <Method name="getCapacidad" returnType="int" visibility="public"/>
+        <Method name="setCapacidad" returnType="void" visibility="public">
+          <Argument type="int" name="capacidad"/>
+        </Method>
+        <Method name="getIntcantCamas" returnType="int" visibility="public"/>
+        <Method name="setIntcantCamas" returnType="void" visibility="public">
+          <Argument type="int" name="intcantCamas"/>
+        </Method>
+        <Method name="getTipoCamas" returnType="String" visibility="public"/>
+        <Method name="setTipoCamas" returnType="void" visibility="public">
+          <Argument type="String" name="tipoCamas"/>
+        </Method>
+        <Method name="getPrecioNoche" returnType="double" visibility="public"/>
+        <Method name="setPrecioNoche" returnType="void" visibility="public">
+          <Argument type="double" name="precioNoche"/>
+        </Method>
+        <Method name="getCodigo" returnType="String" visibility="public"/>
+        <Method name="setCodigo" returnType="void" visibility="public">
+          <Argument type="String" name="codigo"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="AccesoADatos.HuespedData" target="Entidades.Huesped" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="AccesoADatos.TipodeHabitacionData" target="Entidades.TipodeHabitacion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="AccesoADatos.ReservaData" target="Entidades.Reserva" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="habitacion" source="Entidades.Reserva" target="Entidades.Habitacion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Reserva" target="Entidades.Huesped" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Reserva" target="Entidades.TipodeHabitacion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="IdTDHabitacion" source="Entidades.Habitacion" target="Entidades.TipodeHabitacion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Reserva" target="Entidades.Habitacion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="AccesoADatos.HabitacionData" target="Entidades.Habitacion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="habiData" source="AccesoADatos.ReservaData" target="AccesoADatos.HabitacionData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tipoHabitacion" source="Entidades.Reserva" target="Entidades.TipodeHabitacion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="huesped" source="Entidades.Reserva" target="Entidades.Huesped" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Entidades.Habitacion" target="Entidades.TipodeHabitacion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="huespedData" source="AccesoADatos.ReservaData" target="AccesoADatos.HuespedData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tipoDeHabitacionData" source="AccesoADatos.HabitacionData" target="AccesoADatos.TipodeHabitacionData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

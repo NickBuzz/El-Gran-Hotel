@@ -44,7 +44,7 @@ public class GuardarReserva extends javax.swing.JPanel {
         cargarHuespedes();
         jtCodigoHabitacion.setEnabled(false);
         JtMontoApagar.setEnabled(false);
-        
+
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
         JtHabitacionesDispo.setRowSorter(sorter);
     }
@@ -313,12 +313,12 @@ public class GuardarReserva extends javax.swing.JPanel {
             long numNoches = ChronoUnit.DAYS.between(fechaEntrada, fechaSalida);
             double monto = numNoches * tipoHabitacion.getPrecioNoche();
 
-            // Crear una instancia de Reserva
+            // Crea una instancia de Reserva
             Reserva reserva = new Reserva();
 
             selectedHabitacion.setEstado(false);
             habitacionData.modificarHabitacion(selectedHabitacion);
-            
+
             reserva.setHuesped(selectedHuesped);
             reserva.setEstado(estado);
             reserva.setCantidadPerso(cantidadPersonas);
@@ -359,16 +359,20 @@ public class GuardarReserva extends javax.swing.JPanel {
             jtIdHuesped.setText(String.valueOf(selectedHuesped.getIdHuesped()));
         }
 
-
+//obtiene el id del huesped y lo muestra en el campo del id
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void JtHabitacionesDispoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtHabitacionesDispoMouseClicked
+        //se activa cuando el usuario clikea una fila de la tabla 
+        
         int filaSeleccionada = JtHabitacionesDispo.getSelectedRow();
+
         if (filaSeleccionada != -1) {
             Object valorId = JtHabitacionesDispo.getValueAt(filaSeleccionada, 0);
             Object valorMonto = JtHabitacionesDispo.getValueAt(filaSeleccionada, 4);
             jtCodigoHabitacion.setText(String.valueOf(valorId));
             selectedHabitacion = habitacionData.buscarHabitacion((int) valorId);
+
             if (jdFentrada != null && jdfeSalida != null) {
                 // Calcular el monto total de la reserva
                 LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -431,12 +435,6 @@ public class GuardarReserva extends javax.swing.JPanel {
             TipodeHabitacion tipoHabitacion = jcTipoHabitacion.getItemAt(index);
             System.out.println(index);
 
-            // Obtener la fecha de entrada y fecha de salida
-            //LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            //LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            // Obtener las habitaciones disponibles para el tipo de habitación y fechas seleccionadas
-            //HabitacionData habitacionData = new HabitacionData();
             List<Habitacion> habitacionesDisponibles = habitacionData.obtenerTipoHabitacion(tipoHabitacion.getIdTipoHabitacion());
 
             System.out.println(tipoHabitacion.getIdTipoHabitacion());
@@ -448,7 +446,7 @@ public class GuardarReserva extends javax.swing.JPanel {
                     habitacion.getIdHabitacion(),
                     habitacion.getNumero(),
                     habitacion.getPiso(),
-                    habitacion.isEstado()? "LIBRE":"OCUPADA",
+                    habitacion.isEstado() ? "LIBRE" : "OCUPADA",
                     habitacion.getIdTDHabitacion().getIdTipoHabitacion()});
             }
         } catch (Exception ex) {
@@ -479,7 +477,7 @@ public class GuardarReserva extends javax.swing.JPanel {
 
         jcTipoHabitacion.setModel(model);
     }
-
+//permite al usuario seleccionar un tipo de habitacion y ver las habis dispo en la tabla
     private void cargarHuespedes() {
 // lista de huéspedes desde HuespedData
         List<Huesped> huespedes = huespedData.listarHuespedes();
@@ -492,5 +490,5 @@ public class GuardarReserva extends javax.swing.JPanel {
 
         jComboBox1.setModel(model);
     }
-
+//carga la lista de huesped de la base de datos y lo muestra en el combo box
 }

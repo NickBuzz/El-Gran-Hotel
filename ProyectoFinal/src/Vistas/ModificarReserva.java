@@ -40,7 +40,7 @@ public class ModificarReserva extends javax.swing.JPanel {
         cargarHabitacionesDisponiblesModificar();
         jtCodigoHabitacion.setEnabled(false);
         JtMontoApagar.setEnabled(false);
-        
+
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modelo);
         JtHabitacionesDispo.setRowSorter(sorter);
     }
@@ -309,6 +309,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_JtHabitacionesDispoMouseClicked
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
+        //se obtiene los datos nesecarios 
         try {
             LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -319,10 +320,10 @@ public class ModificarReserva extends javax.swing.JPanel {
             Habitacion selectedHabitacion = habitacionData.buscarHabitacion(codigoHabitacion);
             TipodeHabitacion selectedTipoHabitacion = (TipodeHabitacion) jcTipoHabitacion.getSelectedItem();
             double monto = Double.parseDouble(JtMontoApagar.getText());
-            
+
             reservaActual.getHabitacion().setEstado(true);                      // En el caso que al modificar la reserva se cambie de habitacion
             habitacionData.modificarHabitacion(reservaActual.getHabitacion());  // se setea la habitacion que deja como libre(true) en la base.
-            
+
             reservaActual.setFechaEntrada(fechaEntrada);
             reservaActual.setFechaSalida(fechaSalida);
             reservaActual.setCantidadPerso(cantidadPersonas);
@@ -331,15 +332,13 @@ public class ModificarReserva extends javax.swing.JPanel {
             reservaActual.setHuesped(selectedHuesped);
             reservaActual.setTipoHabitacion(selectedTipoHabitacion);
 
-
             reservaActual.setMonto(monto);
 
-
             reservadata.actualizarReserva(reservaActual);
-            
+
             selectedHabitacion.setEstado(false);                        // Setea la habitacion como ocupada(false)
             habitacionData.modificarHabitacion(selectedHabitacion);     // y se actualiza la base de datos.
-            
+
             limpiarFormulario();
             JOptionPane.showMessageDialog(this, "Reserva actualizada exitosamente.");
         } catch (NumberFormatException ex) {
@@ -347,7 +346,7 @@ public class ModificarReserva extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al actualizar la reserva: " + ex.getMessage());
         }
-
+//actualiza una reserva de hotel en la bd
     }//GEN-LAST:event_jbguardarActionPerformed
 
     private void jblimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblimpiarActionPerformed
@@ -405,6 +404,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }
 
     private void llenarCampos(Reserva reserva) {
+
         Habitacion habitacion = reserva.getHabitacion();
         TipodeHabitacion tipoHabitacionReserva = reserva.getHabitacion().getIdTDHabitacion();
 
@@ -415,6 +415,7 @@ public class ModificarReserva extends javax.swing.JPanel {
         jtCodigoHabitacion.setText(String.valueOf(reserva.getHabitacion().getIdHabitacion()));
         Jchekestado.setSelected(reserva.isEstado());
         JtMontoApagar.setText("");
+
         for (int i = 0; i < jComboBox1.getItemCount(); i++) {
             Huesped item = (Huesped) jComboBox1.getItemAt(i);
             if (item.getIdHuesped() == reserva.getHuesped().getIdHuesped()) {
@@ -431,7 +432,7 @@ public class ModificarReserva extends javax.swing.JPanel {
 
         mostrarHabitacionesDisponibles(habitacion.getIdTDHabitacion());
         calcularMontoPagar();
-
+//llena el for con los datos de una reserva que ya existe. y permite modicicar
     }
 
     private void armarCabecera() {
@@ -452,7 +453,7 @@ public class ModificarReserva extends javax.swing.JPanel {
                 habitacion.getIdHabitacion(),
                 habitacion.getNumero(),
                 habitacion.getPiso(),
-                habitacion.isEstado()? "LIBRE":"OCUPADA",
+                habitacion.isEstado() ? "LIBRE" : "OCUPADA",
                 habitacion.getIdTDHabitacion().getIdTipoHabitacion()
             });
 
@@ -495,7 +496,7 @@ public class ModificarReserva extends javax.swing.JPanel {
         jComboBox1.setModel(new DefaultComboBoxModel<>(huespedData.listarHuespedes().toArray()));
         jcTipoHabitacion.setModel(new DefaultComboBoxModel(tipoDeHabitacionData.listarTipodeHabitaciones().toArray()));
     }
-
+//llena los combos con la info de cada uno 
     private void cargarHabitacionesDisponiblesModificar() {
         TipodeHabitacion tipoHabitacionSeleccionado = (TipodeHabitacion) jcTipoHabitacion.getSelectedItem();
 

@@ -97,11 +97,22 @@ public class Habitaciones extends javax.swing.JPanel {
                 jTnumeroActionPerformed(evt);
             }
         });
+        jTnumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTnumeroKeyTyped(evt);
+            }
+        });
 
         jTidhabitacion.setEditable(false);
         jTidhabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTidhabitacionActionPerformed(evt);
+            }
+        });
+
+        jTpiso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTpisoKeyTyped(evt);
             }
         });
 
@@ -274,6 +285,9 @@ public class Habitaciones extends javax.swing.JPanel {
                 cargarDetallesTipoHabitacion(habitacion.getIdTDHabitacion());
             } else {
                 JOptionPane.showMessageDialog(null, "Habitación no encontrada.");
+                 DefaultTableModel modeloTabla = (DefaultTableModel) jTablaHab.getModel();
+                modeloTabla.setRowCount(0);
+                limpiarCampos();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar un número de habitación.");
@@ -348,6 +362,20 @@ public class Habitaciones extends javax.swing.JPanel {
         jTidhabitacion.setEnabled(true);
     }//GEN-LAST:event_jTnumeroFocusLost
 
+    private void jTnumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnumeroKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTnumeroKeyTyped
+
+    private void jTpisoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpisoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTpisoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
@@ -404,6 +432,10 @@ public class Habitaciones extends javax.swing.JPanel {
         jTnumero.setText("");
         jTpiso.setText("");
         jChactivo.setSelected(false);
+        
+  
+       cargarDetallesTipoHabitacion(null);
+       
 
     }
 

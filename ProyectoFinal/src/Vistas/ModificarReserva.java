@@ -278,7 +278,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoHabitacionActionPerformed
-
+//se activa cuando el usuario selecciona un elemento en el combo de tipo de habitacion
         cargarHabitacionesDisponiblesModificar();
         calcularMontoPagar();
 
@@ -286,6 +286,9 @@ public class ModificarReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_jcTipoHabitacionActionPerformed
 
     private void JtHabitacionesDispoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtHabitacionesDispoMouseClicked
+       
+       //obtiene la info de la fila selecionada y calcula el ponto a pagar segun el tipo de habitacion 
+        
         int filaSeleccionada = JtHabitacionesDispo.getSelectedRow();
 
         if (filaSeleccionada != -1) {
@@ -309,7 +312,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_JtHabitacionesDispoMouseClicked
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
-        //se obtiene los datos nesecarios 
+        //se obtiene los datos de la reserva modificada y actualisa la bd 
         try {
             LocalDate fechaEntrada = jdFentrada.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaSalida = jdfeSalida.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -354,6 +357,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }//GEN-LAST:event_jblimpiarActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+      //cuando el usuario selecciona un huesped en el combo lo actualiza
         Huesped selectedHuesped = (Huesped) jComboBox1.getSelectedItem();
         if (selectedHuesped != null) {
             jtIdHuesped.setText(String.valueOf(selectedHuesped.getIdHuesped()));
@@ -404,7 +408,7 @@ public class ModificarReserva extends javax.swing.JPanel {
     }
 
     private void llenarCampos(Reserva reserva) {
-
+//trae los datos de la reserva a modicar 
         Habitacion habitacion = reserva.getHabitacion();
         TipodeHabitacion tipoHabitacionReserva = reserva.getHabitacion().getIdTDHabitacion();
 
@@ -415,7 +419,7 @@ public class ModificarReserva extends javax.swing.JPanel {
         jtCodigoHabitacion.setText(String.valueOf(reserva.getHabitacion().getIdHabitacion()));
         Jchekestado.setSelected(reserva.isEstado());
         JtMontoApagar.setText("");
-
+// se utilizan para traer el husped y el tipo de habitacion asosiado a la reserva
         for (int i = 0; i < jComboBox1.getItemCount(); i++) {
             Huesped item = (Huesped) jComboBox1.getItemAt(i);
             if (item.getIdHuesped() == reserva.getHuesped().getIdHuesped()) {

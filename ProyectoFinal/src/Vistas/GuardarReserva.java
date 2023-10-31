@@ -310,12 +310,12 @@ public class GuardarReserva extends javax.swing.JPanel {
             TipodeHabitacion tipoHabitacion = (TipodeHabitacion) jcTipoHabitacion.getSelectedItem();
 
             // Calcular el monto total de la reserva
-            long numNoches = ChronoUnit.DAYS.between(fechaEntrada, fechaSalida);
-            double monto = numNoches * tipoHabitacion.getPrecioNoche();
+            long numNoches = ChronoUnit.DAYS.between(fechaEntrada, fechaSalida); //obtiene la cantidad de dias 
+            double monto = numNoches * tipoHabitacion.getPrecioNoche(); 
 
             // Crea una instancia de Reserva
             Reserva reserva = new Reserva();
-
+//almacena los detalles de los datos de la reserva que se esta creando 
             selectedHabitacion.setEstado(false);
             habitacionData.modificarHabitacion(selectedHabitacion);
 

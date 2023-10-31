@@ -169,7 +169,7 @@ public class ReservaVista extends javax.swing.JPanel {
     }//GEN-LAST:event_jbActualizarTablaActionPerformed
 
     private void jbNuevaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaReservaActionPerformed
-
+//boton nueva reserva
         Menu.showJPanel(this, new GuardarReserva());
 
 
@@ -188,7 +188,7 @@ public class ReservaVista extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Seleccione la reserva a Modificar");
         }
 
-
+//se asegura de que haya selecionada una reserva en la tabla para abrir la vista 
     }//GEN-LAST:event_jbactualizarActionPerformed
 
     private void jbborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbborrarActionPerformed
@@ -209,7 +209,7 @@ public class ReservaVista extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la reserva a borrar ");
         }
-
+//se asegura de haber selecionado algo en la fila y se elimina(borrado logico)
     }//GEN-LAST:event_jbborrarActionPerformed
 
     private void jtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBuscarActionPerformed
